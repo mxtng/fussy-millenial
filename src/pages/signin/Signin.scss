@@ -1,0 +1,82 @@
+.landing {
+	background: linear-gradient(0deg, rgba(223, 72, 26, 0.9), rgba(223, 72, 26, 0.3)),
+		url("../../assets/main.jpg") no-repeat center center/cover;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100vh;
+	width: 100vw;
+}
+
+.signin-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	.signin-form {
+		display: flex;
+		flex-direction: column;
+		padding: 2rem;
+		height: 100vh;
+		width: 100vw;
+
+		background-color: #eea950;
+
+		h2 {
+			color: grey;
+		}
+
+		.form-item {
+			* {
+				display: block;
+				width: 100%;
+				margin-bottom: 0.5rem;
+			}
+
+			.form-input {
+				padding: 0.3rem;
+				border-radius: 0.2rem;
+				border: none;
+			}
+		}
+
+		.btn {
+			width: 100%;
+		}
+	}
+}
+
+@media (min-width: 544px) {
+	.signin-page {
+		height: 100vh;
+		.signin-form {
+			width: 70vw;
+			border-radius: 0.5rem;
+			height: auto;
+		}
+	}
+}
+@media (min-width: 768px) {
+	.signin-page {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+
+		.signin-form {
+			width: 50%;
+			border-radius: 0.5rem;
+			height: auto;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.signin-page {
+		.signin-form {
+			width: 30vw;
+		}
+	}
+}
