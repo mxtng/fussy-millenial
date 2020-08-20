@@ -17,7 +17,6 @@ const Recipes = () => {
 			</div>
 
 			<div className="recipe-list container-xl">
-
 				<div className="recipe-item">
 					<img className="card-img-top" src="" alt="Recipe image" />
 					<div className="card-body">
@@ -39,7 +38,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -61,7 +59,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -83,7 +80,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -105,7 +101,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -127,7 +122,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -149,7 +143,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -171,7 +164,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -193,7 +185,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -215,7 +206,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -237,7 +227,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -259,7 +248,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -281,7 +269,6 @@ const Recipes = () => {
 					</div>
 				</div>
 
-			
 				<div className="recipe-item">
 					<img className="card-img-top" src="..." alt="Recipe image" />
 					<div className="card-body">
@@ -302,11 +289,6 @@ const Recipes = () => {
 						</div>
 					</div>
 				</div>
-
-			
-
-
-
 			</div>
 		</div>
 	);
