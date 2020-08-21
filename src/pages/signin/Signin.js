@@ -6,7 +6,7 @@ import './Signin.scss';
 const Signin = () => {
 	const [ form, setForm ] = useState({
 		email: '',
-		password: '',
+		password: ''
 	});
 
 	const onChange = (e) => {
@@ -21,7 +21,7 @@ const Signin = () => {
 		console.log(form);
 	};
 
-	const {  email, password} = form;
+	const { email, password } = form;
 
 	return (
 		<Fragment>
@@ -30,10 +30,16 @@ const Signin = () => {
 				<div className="signin-form">
 					<h2>Sign in to your account</h2>
 					<form onSubmit={onSubmit}>
-
 						<div className="form-item">
 							<label htmlFor="email">Email</label>
-							<input type="text" name="email" className="form-input" onChange={onChange} value={email} />
+							<input
+								type="text"
+								name="email"
+								className="form-input"
+								onChange={onChange}
+								value={email}
+								disabled
+							/>
 						</div>
 						<div className="form-item">
 							<label htmlFor="password">Password</label>
@@ -43,10 +49,11 @@ const Signin = () => {
 								className="form-input"
 								onChange={onChange}
 								value={password}
+								disabled
 							/>
 						</div>
 
-						<input type="submit" className="btn btn-secondary" value="Sign in" />
+						<input type="submit" className="btn btn-secondary" value="Sign in" disabled />
 					</form>
 					<p>
 						Don't have an account? <Link to="/register">Sign up</Link>

@@ -34,11 +34,25 @@ const Register = () => {
 					<form onSubmit={onSubmit}>
 						<div className="form-item">
 							<label htmlFor="name">Name</label>
-							<input type="text" name="name" className="form-input" onChange={onChange} value={name} />
+							<input
+								type="text"
+								name="name"
+								className="form-input"
+								onChange={onChange}
+								value={name}
+								disabled
+							/>
 						</div>
 						<div className="form-item">
 							<label htmlFor="email">Email</label>
-							<input type="text" name="email" className="form-input" onChange={onChange} value={email} />
+							<input
+								type="text"
+								name="email"
+								className="form-input"
+								onChange={onChange}
+								value={email}
+								disabled
+							/>
 						</div>
 						<div className="form-item">
 							<label htmlFor="password">Password</label>
@@ -48,6 +62,7 @@ const Register = () => {
 								className="form-input"
 								onChange={onChange}
 								value={password}
+								disabled
 							/>
 						</div>
 						<div className="form-item">
@@ -58,9 +73,10 @@ const Register = () => {
 								className="form-input"
 								onChange={onChange}
 								value={password2}
+								disabled
 							/>
 						</div>
-						<input type="submit" className="btn btn-secondary" value="Sign up" />
+						<input type="submit" className="btn btn-secondary" value="Sign up" disabled />
 					</form>
 					<p>
 						Already have an account? <Link to="/signin">Sign In</Link>
