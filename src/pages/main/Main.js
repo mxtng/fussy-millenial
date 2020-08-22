@@ -1,17 +1,25 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+
+import findIngredients from '../../redux/actions/searchAction';
 
 import './Main.scss';
 
-const Main = () => {
-	const [ search, setSearch ] = useState('');
+const Main = ({ findIngredients, history }) => {
+	const [ ingredientList, setIngredientList ] = useState('');
 
 	const onChange = (e) => {
-		setSearch(e.target.value);
+		setIngredientList(e.target.value);
 	};
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log(search);
+
+		if (ingredientList) {
+			findIngredients(ingredientList);
+			return history.push('/recipes');
+		}
+		return console.log('Please enter ingredients!');
 	};
 
 	return (
@@ -38,4 +46,4 @@ const Main = () => {
 	);
 };
 
-export default Main;
+export default connect(null, { findIngredients })(Main);
