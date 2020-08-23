@@ -1,12 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import findIngredients from '../../redux/actions/searchAction';
-import showAlert from '../../redux/actions/alert';
+import showAlert from '../../redux/actions/showAlert';
+import hideAlert from '../../redux/actions/hideAlert';
 
 import './Main.scss';
 
-const Main = ({ findIngredients, showAlert, alert, history }) => {
+const Main = ({ findIngredients, showAlert, hideAlert, alert, history }) => {
 	const [ ingredientList, setIngredientList ] = useState('');
 
 	const onChange = (e) => {
@@ -23,6 +24,15 @@ const Main = ({ findIngredients, showAlert, alert, history }) => {
 
 		showAlert('Please enter ingredients');
 	};
+
+	useEffect(
+		() => {
+			return () => {
+				hideAlert();
+			};
+		},
+		[ hideAlert ]
+	);
 
 	return (
 		<Fragment>
@@ -59,4 +69,4 @@ const mapStateToProps = (state) => ({
 	alert: state.alert.alert
 });
 
-export default connect(mapStateToProps, { findIngredients, showAlert })(Main);
+export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert })(Main);

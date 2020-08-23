@@ -11,6 +11,6 @@ export default (alertMsg) => (dispatch) => {
 			dispatch({
 				type: HIDE_ALERT
 			}),
-		3000
+		5000
 	);
 };

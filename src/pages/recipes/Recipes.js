@@ -3,8 +3,10 @@ import './Recipes.scss';
 import { connect } from 'react-redux';
 
 import findIngredients from '../../redux/actions/searchAction';
+import showAlert from '../../redux/actions/showAlert';
+import hideAlert from '../../redux/actions/hideAlert';
 
-const Recipes = ({ loading, ingredients, findIngredients }) => {
+const Recipes = ({ loading, ingredients, findIngredients, showAlert, alert, hideAlert }) => {
 	const onClickFavourite = () => {
 		console.log('Favourite Btn Clicked');
 	};
@@ -22,19 +24,30 @@ const Recipes = ({ loading, ingredients, findIngredients }) => {
 		if (searchInput) {
 			return findIngredients(searchInput);
 		}
-		return console.log('Please enter ingredients!');
+		showAlert('Please enter ingredients');
 	};
 
 	useEffect(
 		() => {
 			if (ingredients) return setSearchInput(ingredients);
+
+			return () => {
+				hideAlert();
+			};
 		},
-		[ ingredients ]
+		[ ingredients, hideAlert ]
 	);
 
 	return (
 		<div className="recipe-page">
 			<div className="recipe-search">
+				{!alert ? (
+					''
+				) : (
+					<div className="alert alert-danger" role="alert">
+						Ingredients missing
+					</div>
+				)}
 				<h2 className="title">Recipe search:</h2>
 				<input
 					type="search"
@@ -337,9 +350,10 @@ const Recipes = ({ loading, ingredients, findIngredients }) => {
 	);
 };
 
-const mapStateToProps = ({ search: { ingredients, loading } }) => ({
+const mapStateToProps = ({ search: { ingredients, loading }, alert: { alert } }) => ({
 	ingredients,
-	loading
+	loading,
+	alert
 });
 
-export default connect(mapStateToProps, { findIngredients })(Recipes);
+export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert })(Recipes);
