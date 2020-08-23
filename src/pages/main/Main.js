@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import findIngredients from '../../redux/actions/searchAction';
 import showAlert from '../../redux/actions/showAlert';
 import hideAlert from '../../redux/actions/hideAlert';
+import { recipeRequest } from '../../redux/actions/recipe';
 
 import './Main.scss';
 
-const Main = ({ findIngredients, showAlert, hideAlert, alert, history }) => {
+const Main = ({ findIngredients, showAlert, hideAlert, alert, history, loading, recipeRequest }) => {
 	const [ ingredientList, setIngredientList ] = useState('');
 
 	const onChange = (e) => {
@@ -19,6 +20,7 @@ const Main = ({ findIngredients, showAlert, hideAlert, alert, history }) => {
 
 		if (ingredientList) {
 			findIngredients(ingredientList);
+			recipeRequest();
 			return history.push('/recipes');
 		}
 
@@ -27,11 +29,13 @@ const Main = ({ findIngredients, showAlert, hideAlert, alert, history }) => {
 
 	useEffect(
 		() => {
+			console.log(loading);
+
 			return () => {
 				hideAlert();
 			};
 		},
-		[ hideAlert ]
+		[ hideAlert, loading ]
 	);
 
 	return (
@@ -65,8 +69,9 @@ const Main = ({ findIngredients, showAlert, hideAlert, alert, history }) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
-	alert: state.alert.alert
+const mapStateToProps = ({ alert: { alert }, recipe: { loading } }) => ({
+	alert,
+	loading
 });
 
-export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert })(Main);
+export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert, recipeRequest })(Main);

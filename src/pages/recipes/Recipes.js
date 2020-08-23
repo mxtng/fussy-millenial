@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import findIngredients from '../../redux/actions/searchAction';
 import showAlert from '../../redux/actions/showAlert';
 import hideAlert from '../../redux/actions/hideAlert';
+import { recipeRequest } from '../../redux/actions/recipe';
 
-const Recipes = ({ loading, ingredients, findIngredients, showAlert, alert, hideAlert }) => {
+const Recipes = ({ loading, ingredients, findIngredients, recipeRequest, showAlert, alert, hideAlert }) => {
 	const onClickFavourite = () => {
 		console.log('Favourite Btn Clicked');
 	};
@@ -22,6 +23,7 @@ const Recipes = ({ loading, ingredients, findIngredients, showAlert, alert, hide
 
 	const findRecipes = () => {
 		if (searchInput) {
+			recipeRequest();
 			return findIngredients(searchInput);
 		}
 		showAlert('Please enter ingredients');
@@ -29,14 +31,54 @@ const Recipes = ({ loading, ingredients, findIngredients, showAlert, alert, hide
 
 	useEffect(
 		() => {
+			console.log(loading);
 			if (ingredients) return setSearchInput(ingredients);
 
 			return () => {
 				hideAlert();
 			};
 		},
-		[ ingredients, hideAlert ]
+		[ ingredients, hideAlert, loading ]
 	);
+
+	// RECIPE_REQUEST
+	// RECIPE_SUCCESS
+	// RECIPE_FAILURE
+
+	// RECIPE STATE OBJECT/CONTENT
+	// const initialState = {
+	// 	isFetching: false,
+	// 	recipes: [],
+	// 	error: {}
+	// }
+
+	// {
+	// 	isFetching && <RecipeItems />
+	// }
+
+	// Scenario: Initial State
+	// N/A
+	// isFetching: false,
+	// recipes: [],
+	// error: {}
+
+	// Scenario: Start Search
+	// RECIPE_REQUEST
+	// isFetching: true,
+	// recipes: [],
+	// error: {}
+
+	// Scenario: Return Search Results
+	// RECIPE_SUCCESS
+	// isFetching: false,
+	// recipes: [array],
+	// error: {}
+
+	// Scenario: Return Search Error
+	// RECIPE_FAILURE
+	// isFetching: false
+	// recipes: [],
+	// error: {error}
 
 	return (
 		<div className="recipe-page">
@@ -62,12 +104,12 @@ const Recipes = ({ loading, ingredients, findIngredients, showAlert, alert, hide
 			</div>
 
 			<div className="recipe-list container-xl">
-				{loading ? (
+				{!loading ? (
 					<div>
-						<div className="spinner-border" role="status" style={{ width: '4rem', height: '4rem' }}>
+						{/* <div className="spinner-border" role="status" style={{ width: '4rem', height: '4rem' }}>
 							<span className="sr-only">Loading...</span>
 						</div>
-						Loading...
+						Loading... */}
 					</div>
 				) : (
 					<Fragment>
@@ -350,10 +392,10 @@ const Recipes = ({ loading, ingredients, findIngredients, showAlert, alert, hide
 	);
 };
 
-const mapStateToProps = ({ search: { ingredients, loading }, alert: { alert } }) => ({
+const mapStateToProps = ({ search: { ingredients }, recipe: { loading }, alert: { alert } }) => ({
 	ingredients,
 	loading,
 	alert
 });
 
-export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert })(Recipes);
+export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert, recipeRequest })(Recipes);

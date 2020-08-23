@@ -1,3 +1,8 @@
 export const SEARCH_INGREDIENTS = 'SEARCH_INGREDIENTS';
 export const SHOW_ALERT = 'SHOW_ALERT';
 export const HIDE_ALERT = 'HIDE_ALERT';
+export const RECIPE_REQUEST = 'RECIPE_REQUEST';
+export const RECIPE_SUCCESS = 'RECIPE_SUCCESS';
+export const RECIPE_FAILURE = 'RECIPE_FAILURE';
+
+
