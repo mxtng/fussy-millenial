@@ -23,13 +23,6 @@ const Recipes = ({
 	hideAlert,
 	recipes
 }) => {
-	const onClickFavourite = () => {
-		console.log('Favourite Btn Clicked');
-	};
-	const onClickDetail = () => {
-		console.log('Detail Btn Clicked');
-	};
-
 	const [ searchInput, setSearchInput ] = useState('');
 
 	const onChange = (e) => {
@@ -58,12 +51,11 @@ const Recipes = ({
 
 	useEffect(
 		() => {
-			console.log(recipes, 11111);
 			if (recipes.length > 0) {
 				recipeSuccess();
 			}
 		},
-		[ recipes ]
+		[ recipes, recipeSuccess ]
 	);
 
 	return (
@@ -101,10 +93,24 @@ const Recipes = ({
 					'No Recipes found'
 				) : (
 					<Fragment>
-						<RecipeItem />
-						<RecipeItem />
-						<RecipeItem />
-						<RecipeItem />
+						{recipes.map(({ id, ...otherProps }) => (
+							<RecipeItem key={id} {...otherProps}>
+								<button
+									type="button"
+									className="btn btn-secondary"
+									onClick={() => console.log('clicked Fav')}
+								>
+									Favourite
+								</button>
+								<button
+									type="button"
+									className="btn btn-secondary"
+									onClick={() => console.log('clicked Detail')}
+								>
+									Details
+								</button>
+							</RecipeItem>
+						))}
 					</Fragment>
 				)}
 			</div>

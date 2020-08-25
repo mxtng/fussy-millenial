@@ -1,7 +1,7 @@
 const data = [
   {
     id: 1,
-    name: 'Chicken Pie',
+    name: 'Creamy Chicken Alfredo',
     ingredients: 'chicken, mushroom, onions'
   },
   {
@@ -11,7 +11,7 @@ const data = [
   },
   {
     id: 3,
-    name: 'Chicken Lasagna',
+    name: 'Chicken Pesto',
     ingredients: 'chicken, mushroom, onions'
   },
 ];
