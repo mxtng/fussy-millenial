@@ -5,11 +5,24 @@ import { connect } from 'react-redux';
 import findIngredients from '../../redux/actions/searchAction';
 import showAlert from '../../redux/actions/showAlert';
 import hideAlert from '../../redux/actions/hideAlert';
-import { recipeRequest } from '../../redux/actions/recipe';
+import { recipeRequest, recipeSuccess, recipeClear } from '../../redux/actions/recipe';
 
 import RecipeItem from '../../components/recipe-item/RecipeItem';
 
-const Recipes = ({ loading, ingredients, findIngredients, recipeRequest, showAlert, alert, hideAlert }) => {
+import data from './data';
+
+const Recipes = ({
+	loading,
+	ingredients,
+	findIngredients,
+	recipeRequest,
+	recipeSuccess,
+	recipeClear,
+	showAlert,
+	alert,
+	hideAlert,
+	recipes
+}) => {
 	const onClickFavourite = () => {
 		console.log('Favourite Btn Clicked');
 	};
@@ -25,7 +38,8 @@ const Recipes = ({ loading, ingredients, findIngredients, recipeRequest, showAle
 
 	const findRecipes = () => {
 		if (searchInput) {
-			recipeRequest();
+			recipeClear();
+			recipeRequest(data);
 			return findIngredients(searchInput);
 		}
 		showAlert('Please enter ingredients');
@@ -33,14 +47,23 @@ const Recipes = ({ loading, ingredients, findIngredients, recipeRequest, showAle
 
 	useEffect(
 		() => {
-			console.log(loading);
 			if (ingredients) return setSearchInput(ingredients);
 
 			return () => {
 				hideAlert();
 			};
 		},
-		[ ingredients, hideAlert, loading ]
+		[ ingredients, hideAlert ]
+	);
+
+	useEffect(
+		() => {
+			console.log(recipes, 11111);
+			if (recipes.length > 0) {
+				recipeSuccess();
+			}
+		},
+		[ recipes ]
 	);
 
 	return (
@@ -67,13 +90,15 @@ const Recipes = ({ loading, ingredients, findIngredients, recipeRequest, showAle
 			</div>
 
 			<div className="recipe-list container-xl">
-				{!loading ? (
+				{loading ? (
 					<div>
-						{/* <div className="spinner-border" role="status" style={{ width: '4rem', height: '4rem' }}>
+						<div className="spinner-border" role="status" style={{ width: '4rem', height: '4rem' }}>
 							<span className="sr-only">Loading...</span>
 						</div>
-						Loading... */}
+						Loading...
 					</div>
+				) : recipes.length === 0 ? (
+					'No Recipes found'
 				) : (
 					<Fragment>
 						<RecipeItem />
@@ -87,10 +112,18 @@ const Recipes = ({ loading, ingredients, findIngredients, recipeRequest, showAle
 	);
 };
 
-const mapStateToProps = ({ search: { ingredients }, recipe: { loading }, alert: { alert } }) => ({
+const mapStateToProps = ({ search: { ingredients }, recipe: { loading, recipes }, alert: { alert } }) => ({
 	ingredients,
 	loading,
-	alert
+	alert,
+	recipes
 });
 
-export default connect(mapStateToProps, { findIngredients, showAlert, hideAlert, recipeRequest })(Recipes);
+export default connect(mapStateToProps, {
+	findIngredients,
+	showAlert,
+	hideAlert,
+	recipeRequest,
+	recipeSuccess,
+	recipeClear
+})(Recipes);

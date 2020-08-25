@@ -8,6 +8,8 @@ import { recipeRequest } from '../../redux/actions/recipe';
 
 import './Main.scss';
 
+import data from '../recipes/data';
+
 const Main = ({ findIngredients, showAlert, hideAlert, alert, history, loading, recipeRequest }) => {
 	const [ ingredientList, setIngredientList ] = useState('');
 
@@ -20,7 +22,7 @@ const Main = ({ findIngredients, showAlert, hideAlert, alert, history, loading, 
 
 		if (ingredientList) {
 			findIngredients(ingredientList);
-			recipeRequest();
+			recipeRequest(data);
 			return history.push('/recipes');
 		}
 
