@@ -1,9 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./Recipes.scss";
 import { connect } from "react-redux";
-
-import showAlert from "../../redux/actions/showAlert";
-import hideAlert from "../../redux/actions/hideAlert";
+import { showAlert, hideAlert } from "../../redux/actions/alert";
 import {
   ingredientSearch,
   recipeRequest,
@@ -11,9 +9,7 @@ import {
   updateFavourite,
   removeFavourite,
 } from "../../redux/actions/recipe";
-
 import RecipeItem from "../../components/recipe-item/RecipeItem";
-
 import data from "./data";
 
 const Recipes = ({
@@ -100,7 +96,7 @@ const Recipes = ({
             Loading...
           </div>
         ) : recipes.length === 0 ? (
-          "No Recipes Found. Please search ingredients."
+          "No recipes found. Please search ingredients."
         ) : (
           <Fragment>
             {recipes.map(({ id, ...otherProps }) => (

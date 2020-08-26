@@ -1,14 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
-
+import { showAlert, hideAlert } from "../../redux/actions/alert";
 import { ingredientSearch } from "../../redux/actions/recipe";
-import showAlert from "../../redux/actions/showAlert";
-import hideAlert from "../../redux/actions/hideAlert";
 import { recipeRequest } from "../../redux/actions/recipe";
+import data from "../recipes/data";
 
 import "./Main.scss";
-
-import data from "../recipes/data";
 
 const Main = ({
   ingredientSearch,
@@ -33,13 +30,10 @@ const Main = ({
       recipeRequest(data);
       return history.push("/recipes");
     }
-
     showAlert("Please enter ingredients");
   };
 
   useEffect(() => {
-    console.log(loading);
-
     return () => {
       hideAlert();
     };
