@@ -5,7 +5,13 @@ import { connect } from 'react-redux';
 import findIngredients from '../../redux/actions/searchAction';
 import showAlert from '../../redux/actions/showAlert';
 import hideAlert from '../../redux/actions/hideAlert';
-import { recipeRequest, recipeSuccess, recipeClear } from '../../redux/actions/recipe';
+import {
+	recipeRequest,
+	recipeSuccess,
+	recipeClear,
+	updateFavourite,
+	removeFavourite
+} from '../../redux/actions/recipe';
 
 import RecipeItem from '../../components/recipe-item/RecipeItem';
 
@@ -18,6 +24,7 @@ const Recipes = ({
 	recipeRequest,
 	recipeSuccess,
 	recipeClear,
+	updateFavourite,
 	showAlert,
 	alert,
 	hideAlert,
@@ -58,6 +65,10 @@ const Recipes = ({
 		[ recipes, recipeSuccess ]
 	);
 
+	const favClick = (id) => {
+		updateFavourite(id);
+	};
+
 	return (
 		<div className="recipe-page">
 			<div className="recipe-search">
@@ -97,8 +108,9 @@ const Recipes = ({
 							<RecipeItem key={id} {...otherProps}>
 								<button
 									type="button"
+									name="favourite"
 									className="btn btn-secondary"
-									onClick={() => console.log('clicked Fav')}
+									onClick={() => favClick(otherProps)}
 								>
 									Favourite
 								</button>
@@ -131,5 +143,7 @@ export default connect(mapStateToProps, {
 	hideAlert,
 	recipeRequest,
 	recipeSuccess,
-	recipeClear
+	recipeClear,
+	updateFavourite,
+	removeFavourite
 })(Recipes);
