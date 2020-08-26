@@ -1,7 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import Landing from '../../components/layout/landing/Landing';
+import Landing from "../../components/layout/landing/Landing";
+import Alert from "../../components/alert/Alert";
 
 import { showAlert, hideAlert } from "../../redux/actions/alert";
 import { ingredientSearch } from "../../redux/actions/recipe";
@@ -14,7 +15,6 @@ const Main = ({
   ingredientSearch,
   showAlert,
   hideAlert,
-  alert,
   history,
   loading,
   recipeRequest,
@@ -46,13 +46,7 @@ const Main = ({
     <Fragment>
       <Landing />
       <div className="main-page">
-        {!alert ? (
-          ""
-        ) : (
-          <div className="alert alert-danger" role="alert">
-            Ingredients missing
-          </div>
-        )}
+        <Alert />
         <h1 className="title">Fussy Millenial</h1>
 
         <form className="search-field" onSubmit={onSubmit}>
@@ -73,8 +67,7 @@ const Main = ({
   );
 };
 
-const mapStateToProps = ({ alert: { alert }, recipe: { loading } }) => ({
-  alert,
+const mapStateToProps = ({ recipe: { loading } }) => ({
   loading,
 });
 

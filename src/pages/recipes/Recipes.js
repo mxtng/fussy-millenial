@@ -1,6 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./Recipes.scss";
 import { connect } from "react-redux";
+
+import Alert from "../../components/alert/Alert";
+
 import { showAlert, hideAlert } from "../../redux/actions/alert";
 import {
   ingredientSearch,
@@ -20,7 +23,6 @@ const Recipes = ({
   recipeRequest,
   recipeSuccess,
   updateFavourite,
-  alert,
   showAlert,
   hideAlert,
 }) => {
@@ -60,13 +62,7 @@ const Recipes = ({
   return (
     <div className="recipe-page">
       <div className="recipe-search">
-        {!alert ? (
-          ""
-        ) : (
-          <div className="alert alert-danger" role="alert">
-            Ingredients missing
-          </div>
-        )}
+        <Alert />
         <h2 className="title">Recipe search:</h2>
         <input
           type="search"
@@ -126,13 +122,9 @@ const Recipes = ({
   );
 };
 
-const mapStateToProps = ({
-  recipe: { loading, ingredients, recipes },
-  alert: { alert },
-}) => ({
+const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
   ingredients,
   loading,
-  alert,
   recipes,
 });
 
