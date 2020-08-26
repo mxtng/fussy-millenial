@@ -53,6 +53,7 @@ const Recipes = ({
   }, [recipes, recipeSuccess]);
 
   const favClick = (id) => {
+    console.log(id);
     updateFavourite(id);
   };
 
@@ -99,13 +100,13 @@ const Recipes = ({
           "No recipes found. Please search ingredients."
         ) : (
           <Fragment>
-            {recipes.map(({ id, ...otherProps }) => (
-              <RecipeItem key={id} {...otherProps}>
+            {recipes.map((props) => (
+              <RecipeItem key={props.id} {...props}>
                 <button
                   type="button"
                   name="favourite"
                   className="btn btn-secondary"
-                  onClick={() => favClick(otherProps)}
+                  onClick={() => favClick(props)}
                 >
                   Favourite
                 </button>

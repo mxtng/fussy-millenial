@@ -52,7 +52,9 @@ export default (state = initialState, action) => {
     case UPDATE_FAVOURITE:
       return {
         ...state,
-        favourites: [...state.favourites, payload],
+        favourites: state.favourites.some(({ id }) => id === payload.id)
+          ? state.favourites
+          : [...state.favourites, payload],
       };
     case REMOVE_FAVOURITE:
       return {
