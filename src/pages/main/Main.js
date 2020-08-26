@@ -1,5 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
+
+import Landing from '../../components/layout/landing/Landing';
+
 import { showAlert, hideAlert } from "../../redux/actions/alert";
 import { ingredientSearch } from "../../redux/actions/recipe";
 import { recipeRequest } from "../../redux/actions/recipe";
@@ -41,7 +44,7 @@ const Main = ({
 
   return (
     <Fragment>
-      <div className="landing" />
+      <Landing />
       <div className="main-page">
         {!alert ? (
           ""

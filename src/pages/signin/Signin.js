@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Landing from '../../components/layout/landing/Landing';
+
 import './Signin.scss';
 
 const Signin = () => {
@@ -25,7 +27,7 @@ const Signin = () => {
 
 	return (
 		<Fragment>
-			<div className="landing" />
+			<Landing />
 			<div className="signin-page">
 				<div className="signin-form">
 					<h2>Sign in to your account</h2>

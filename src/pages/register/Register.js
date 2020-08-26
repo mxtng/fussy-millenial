@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Landing from '../../components/layout/landing/Landing';
+
 import './Register.scss';
 
 const Register = () => {
@@ -27,7 +29,7 @@ const Register = () => {
 
 	return (
 		<Fragment>
-			<div className="landing" />
+			<Landing />
 			<div className="register-page">
 				<div className="register-form">
 					<h2>Register your account</h2>
