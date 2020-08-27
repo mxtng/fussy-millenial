@@ -7,6 +7,8 @@ import { showAlert, hideAlert } from "../../redux/actions/alert";
 import data from "../../pages/recipes/data";
 import { withRouter } from "react-router-dom";
 
+import './Search.scss';
+
 const Search = ({
   ingredients,
   ingredientSearch,
@@ -43,22 +45,22 @@ const Search = ({
   };
 
   return (
-    <div className="input-group">
-      <input
-        type="search"
-        name="search"
-        className="form-control"
-        placeholder="Search ingredients"
-        onChange={onChange}
-        value={ingredientList}
-      />
-      <button
-        type="button"
-        className="btn btn-secondary"
-        onClick={findRecipe_test}
-      >
-        Search
-      </button>
+    <div className="search">
+        <input
+          type="search"
+          name="search"
+          className="form-control"
+          placeholder="Search ingredients"
+          onChange={onChange}
+          value={ingredientList}
+        />
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={findRecipe_test}
+        >
+          Search
+        </button>
     </div>
   );
 };
