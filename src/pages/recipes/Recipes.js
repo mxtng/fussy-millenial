@@ -1,53 +1,18 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import "./Recipes.scss";
 import { connect } from "react-redux";
 
 import Alert from "../../components/alert/Alert";
+import Search from "../../components/search/Search";
 
-import { showAlert, hideAlert } from "../../redux/actions/alert";
 import {
-  ingredientSearch,
-  recipeRequest,
   recipeSuccess,
   updateFavourite,
   removeFavourite,
 } from "../../redux/actions/recipe";
 import RecipeItem from "../../components/recipe-item/RecipeItem";
-import data from "./data";
 
-const Recipes = ({
-  loading,
-  ingredients,
-  ingredientSearch,
-  recipes,
-  recipeRequest,
-  recipeSuccess,
-  updateFavourite,
-  showAlert,
-  hideAlert,
-}) => {
-  const [searchInput, setSearchInput] = useState("");
-
-  const onChange = (e) => {
-    setSearchInput(e.target.value);
-  };
-
-  const findRecipes = () => {
-    if (searchInput) {
-      ingredientSearch(searchInput);
-      return recipeRequest(data);
-    }
-    showAlert("Please enter ingredients");
-  };
-
-  useEffect(() => {
-    if (ingredients) return setSearchInput(ingredients);
-
-    return () => {
-      hideAlert();
-    };
-  }, [ingredients, hideAlert]);
-
+const Recipes = ({ loading, recipes, recipeSuccess, updateFavourite }) => {
   useEffect(() => {
     if (recipes.length > 0) {
       recipeSuccess();
@@ -62,22 +27,9 @@ const Recipes = ({
   return (
     <div className="recipe-page">
       <div className="recipe-search">
-        <Alert />
         <h2 className="title">Recipe search:</h2>
-        <input
-          type="search"
-          className="search-input"
-          placeholder="Search ingredients for recipes"
-          onChange={onChange}
-          value={searchInput}
-        />
-        <button
-          type="button"
-          className="btn btn-secondary mt-2"
-          onClick={findRecipes}
-        >
-          Search
-        </button>
+        <Alert />
+        <Search />
       </div>
 
       <div className="recipe-list container-xl">
@@ -123,16 +75,12 @@ const Recipes = ({
 };
 
 const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
-  ingredients,
   loading,
+  ingredients,
   recipes,
 });
 
 export default connect(mapStateToProps, {
-  showAlert,
-  hideAlert,
-  ingredientSearch,
-  recipeRequest,
   recipeSuccess,
   updateFavourite,
   removeFavourite,
