@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import Alert from "../../components/alert/Alert";
 import Search from "../../components/search/Search";
+import Spinner from "../../components/spinner/Spinner";
 
 import {
   recipeSuccess,
@@ -34,16 +35,7 @@ const Recipes = ({ loading, recipes, recipeSuccess, updateFavourite }) => {
 
       <div className="recipe-list container-xl">
         {loading ? (
-          <div>
-            <div
-              className="spinner-border"
-              role="status"
-              style={{ width: "4rem", height: "4rem" }}
-            >
-              <span className="sr-only">Loading...</span>
-            </div>
-            Loading...
-          </div>
+          <Spinner />
         ) : recipes.length === 0 ? (
           "No recipes found. Please search ingredients."
         ) : (
