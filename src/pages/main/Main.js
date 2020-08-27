@@ -12,8 +12,10 @@ const Main = () => {
       <Landing />
       <div className="main-page">
         <h1 className="title">Fussy Millenial</h1>
-        <Alert />
-        <Search />
+        <div className="search-container">
+          <Alert />
+          <Search />
+        </div>
         <p className="search-example">e.g. chicken, mushroom, onions...</p>
       </div>
     </Fragment>
