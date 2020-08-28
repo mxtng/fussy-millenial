@@ -1,0 +1,36 @@
+.navbar.block {
+  #navbar-toggler-checkbox {
+    display: none;
+  }
+
+  #navbar-toggler-checkbox:checked ~ .collapse {
+    display: block;
+
+    margin: 0 1rem;
+
+    .nav-link {
+      text-align: center;
+      font-size: 1.2rem;
+      border-bottom: 1px solid orange;
+      margin: 0.2rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar.block {
+    .navbar-toggler-checkbox {
+      display: none;
+
+      .navbar.block {
+        border: none;
+      }
+    }
+
+    #navbar-toggler-checkbox:checked ~ .collapse {
+      .nav-link {
+        border: none;
+      }
+    }
+  }
+}

@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './Navbar.scss';
+
 const Navbar = () => (
-	<nav className="navbar navbar-expand-md
-   navbar-light bg-light">
+	<nav className="navbar block navbar-expand-md
+   navbar-dark bg-dark">
 		<div className="container-lg">
-			<button
-				className="navbar-toggler"
+			<input type="checkbox" id="navbar-toggler-checkbox"/>
+			<label
+				for="navbar-toggler-checkbox"
+				className="navbar-toggler-checkbox"
 				type="button"
 				data-toggle="collapse"
 				data-target="#navbarTogglerDemo01"
@@ -15,7 +19,7 @@ const Navbar = () => (
 				aria-label="Toggle navigation"
 			>
 				<span className="navbar-toggler-icon" />
-			</button>
+			</label>
 
 			<Link className="navbar-brand h1" to="/">
 				Fussy Millenial
