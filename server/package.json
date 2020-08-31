@@ -1,17 +1,16 @@
 {
-  "name": "server-side",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "express-validator": "^6.6.1",
     "mongoose": "^5.10.2"
   },
   "devDependencies": {
