@@ -9,7 +9,7 @@ const Navbar = () => (
 		<div className="container-lg">
 			<input type="checkbox" id="navbar-toggler-checkbox"/>
 			<label
-				for="navbar-toggler-checkbox"
+				htmlFor="navbar-toggler-checkbox"
 				className="navbar-toggler-checkbox"
 				type="button"
 				data-toggle="collapse"
