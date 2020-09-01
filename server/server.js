@@ -4,12 +4,15 @@ const app = express();
 
 const config = require("./config/db");
 
-mongoose.connect(config.db, (error) => {
-  if (error) {
-    console.error("MongoDB connection error!");
-    throw error;
+mongoose.connect(
+  config.db,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (error) => {
+    if (error) {
+      console.error(error);
+    }
   }
-});
+);
 
 app.use(express.json({ extended: false }));
 
