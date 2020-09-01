@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import "./Recipes.scss";
 import { connect } from "react-redux";
 
@@ -7,19 +7,12 @@ import Search from "../../components/search/Search";
 import Spinner from "../../components/spinner/Spinner";
 
 import {
-  recipeSuccess,
   updateFavourite,
   removeFavourite,
 } from "../../redux/actions/recipe";
 import RecipeItem from "../../components/recipe-item/RecipeItem";
 
-const Recipes = ({ loading, recipes, recipeSuccess, updateFavourite }) => {
-  useEffect(() => {
-    if (recipes.length > 0) {
-      recipeSuccess();
-    }
-  }, [recipes, recipeSuccess]);
-
+const Recipes = ({ loading, recipes, updateFavourite }) => {
   const favClick = (id) => {
     console.log(id);
     updateFavourite(id);
@@ -41,7 +34,7 @@ const Recipes = ({ loading, recipes, recipeSuccess, updateFavourite }) => {
         ) : (
           <Fragment>
             {recipes.map((props) => (
-              <RecipeItem key={props.id} {...props}>
+              <RecipeItem key={props._id} {...props}>
                 <button
                   type="button"
                   name="favourite"
@@ -73,7 +66,6 @@ const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
 });
 
 export default connect(mapStateToProps, {
-  recipeSuccess,
   updateFavourite,
   removeFavourite,
 })(Recipes);

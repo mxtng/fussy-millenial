@@ -1,6 +1,5 @@
+import axios from "axios";
 import {
-  INGREDIENT_SEARCH,
-  RECIPE_CLEAR,
   RECIPE_REQUEST,
   RECIPE_SUCCESS,
   RECIPE_FAILURE,
@@ -8,31 +7,32 @@ import {
   REMOVE_FAVOURITE,
 } from "./types";
 
-export const ingredientSearch = (ingredients) => {
-  return {
-    type: INGREDIENT_SEARCH,
-    payload: ingredients,
-  };
-};
+export const fetchRecipes = (ingredients) => async (dispatch) => {
+  try {
+    dispatch(recipeRequest(ingredients));
 
-export const recipeClear = () => {
-  return {
-    type: RECIPE_CLEAR,
-  };
+    const res = await axios.post("/api/recipes", {
+      name: "test_recipes",
+      ingredients,
+    });
+    dispatch(recipeSuccess(res.data));
+  } catch (error) {
+    console.error(error.message);
+    dispatch(recipeFailure());
+  }
 };
 
 export const recipeRequest = (data) => async (dispatch) => {
-  await dispatch(recipeClear());
-
   await dispatch({
     type: RECIPE_REQUEST,
     payload: data,
   });
 };
 
-export const recipeSuccess = () => {
+export const recipeSuccess = (recipes) => {
   return {
     type: RECIPE_SUCCESS,
+    payload: recipes,
   };
 };
 

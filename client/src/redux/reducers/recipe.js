@@ -1,6 +1,4 @@
 import {
-  INGREDIENT_SEARCH,
-  RECIPE_CLEAR,
   RECIPE_REQUEST,
   RECIPE_SUCCESS,
   RECIPE_FAILURE,
@@ -20,34 +18,26 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case INGREDIENT_SEARCH:
-      return {
-        ...state,
-        loading: true,
-        ingredients: payload,
-      };
-    case RECIPE_CLEAR:
-      return {
-        ...state,
-        loading: false,
-        recipes: [],
-      };
     case RECIPE_REQUEST:
       return {
         ...state,
         loading: true,
-        recipes: payload,
+        ingredients: payload,
+        recipes: [],
       };
+
     case RECIPE_SUCCESS:
       return {
         ...state,
         loading: false,
+        recipes: [payload],
       };
+
     case RECIPE_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { msg: "Recipe Error" },
+        error: { msg: "Recipe Error." },
       };
     case UPDATE_FAVOURITE:
       return {

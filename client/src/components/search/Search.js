@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { ingredientSearch, recipeRequest } from "../../redux/actions/recipe";
+import { fetchRecipes } from "../../redux/actions/recipe";
 import { showAlert, hideAlert } from "../../redux/actions/alert";
 
-import data from "../../pages/recipes/data";
 import { withRouter } from "react-router-dom";
 
-import './Search.scss';
+import "./Search.scss";
 
 const Search = ({
   ingredients,
-  ingredientSearch,
-  recipeRequest,
+
+  fetchRecipes,
   showAlert,
   hideAlert,
   history,
@@ -34,11 +33,11 @@ const Search = ({
     setIngredientList(e.target.value);
   };
 
-  const findRecipe_test = () => {
-    if (!ingredientList) return showAlert("Please enter ingredients");
+  const findRecipes = () => {
+    if (!ingredientList) return showAlert("Please enter ingredients.");
 
-    ingredientSearch(ingredientList);
-    recipeRequest(data);
+    fetchRecipes(ingredientList);
+
     if (location.pathname === "/") {
       return history.push("/recipes");
     }
@@ -46,21 +45,17 @@ const Search = ({
 
   return (
     <div className="search">
-        <input
-          type="search"
-          name="search"
-          className="form-control"
-          placeholder="Search ingredients"
-          onChange={onChange}
-          value={ingredientList}
-        />
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={findRecipe_test}
-        >
-          Search
-        </button>
+      <input
+        type="search"
+        name="search"
+        className="form-control"
+        placeholder="Search ingredients"
+        onChange={onChange}
+        value={ingredientList}
+      />
+      <button type="button" className="btn btn-secondary" onClick={findRecipes}>
+        Search
+      </button>
     </div>
   );
 };
@@ -70,8 +65,7 @@ const mapStateToProps = ({ recipe: { ingredients } }) => ({
 });
 
 export default connect(mapStateToProps, {
-  ingredientSearch,
-  recipeRequest,
+  fetchRecipes,
   showAlert,
   hideAlert,
 })(withRouter(Search));
