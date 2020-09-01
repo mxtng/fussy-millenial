@@ -1,13 +1,23 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
-const PORT = 4000;
+const config = require("./config/db");
 
-app.use(express.json());
+mongoose.connect(config.db, (error) => {
+  if (error) {
+    console.error("MongoDB connection error!");
+    throw error;
+  }
+});
+
+app.use(express.json({ extended: false }));
 
 app.use("/api/recipes", require("./routes/recipes"));
 app.use("/api/favourites", require("./routes/favourites"));
 app.use("/api/auth", require("./routes/authentication"));
 app.use("/api/users", require("./routes/users"));
+
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
