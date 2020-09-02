@@ -6,10 +6,7 @@ import Alert from "../../components/alert/Alert";
 import Search from "../../components/search/Search";
 import Spinner from "../../components/spinner/Spinner";
 
-import {
-  updateFavourite,
-  removeFavourite,
-} from "../../redux/actions/recipe";
+import { updateFavourite, removeFavourite } from "../../redux/actions/recipe";
 import RecipeItem from "../../components/recipe-item/RecipeItem";
 
 const Recipes = ({ loading, recipes, updateFavourite }) => {
@@ -33,8 +30,8 @@ const Recipes = ({ loading, recipes, updateFavourite }) => {
           "No recipes found. Please search ingredients."
         ) : (
           <Fragment>
-            {recipes.map((props) => (
-              <RecipeItem key={props._id} {...props}>
+            {recipes[0].map((props) => (
+              <RecipeItem key={props.id} {...props}>
                 <button
                   type="button"
                   name="favourite"
