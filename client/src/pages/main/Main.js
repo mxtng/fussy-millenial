@@ -15,8 +15,18 @@ const Main = () => {
         <div className="search-container">
           <Alert />
           <Search />
+        <small className="search-example">e.g. chicken, mushroom, onions</small>
         </div>
-        <p className="search-example">e.g. chicken, mushroom, onions...</p>
+        <span className="tag">
+          Powered by{" "}
+          <a
+            href="https://spoonacular.com/food-api"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            spoonacular
+          </a>
+        </span>
       </div>
     </Fragment>
   );

@@ -9,14 +9,17 @@
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: grey;
-    opacity: 0.8g;
+    opacity: 0.8;
   }
 
   .search-container {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 70vw;
+    background: orange;
+    padding: 0.9rem;
+    border-radius: 0.4rem;
 
     * {
       width: 100%;
@@ -24,7 +27,15 @@
   }
 
   .search-example {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .tag {
+    margin-top: 1rem;
+    a {
+      color: greenyellow;
+    }
   }
 }
 
@@ -37,9 +48,9 @@
     .search-container {
       width: 50vw;
     }
-    .search-example {
-      font-size: 1rem;
-    }
+    // .search-example {
+    //   font-size: 1rem;
+    // }
   }
 }
 
@@ -61,10 +72,9 @@
     }
     .search-container {
       max-width: 500px;
-
     }
-    .search-example {
-      font-size: 1.1rem;
-    }
+    // .search-example {
+    //   font-size: 1.1rem;
+    // }
   }
 }
