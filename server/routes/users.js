@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const secretKey = require("../config/db").secretKey;
 
 const User = require("../models/user");
 
@@ -37,7 +40,9 @@ router.post("/login", async (req, res) => {
 
     if (!verification) return res.status(400).send("Invalid Credentials");
 
-    res.send(user.id);
+    const token = jwt.sign({ id: user.id }, secretKey);
+
+    res.send(token);
   } catch (error) {
     console.error(error.message);
     res.status(400).send("Login Failed");
