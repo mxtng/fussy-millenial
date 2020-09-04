@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../../../redux/actions/auth";
 
 import "./Navbar.scss";
 
-const Navbar = ({ authenticated }) => {
+const Navbar = ({ authenticated, logoutUser }) => {
   console.log(authenticated);
   return (
     <nav
@@ -50,9 +51,9 @@ const Navbar = ({ authenticated }) => {
                 </Link>
               </Fragment>
             ) : (
-              <Link className="nav-link" to="/signin">
+              <button type="button" className="nav-link logout-btn" onClick={logoutUser}>
                 Sign Out
-              </Link>
+              </button>
             )}
           </div>
         </div>
@@ -65,4 +66,4 @@ const mapStateToProps = ({ auth: { authenticated } }) => ({
   authenticated,
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logoutUser })(Navbar);
