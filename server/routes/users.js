@@ -21,7 +21,10 @@ router.post("/register", async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
 
     await user.save();
-    res.send("Registration Successful");
+
+    const token = jwt.sign({ id: user.id }, secretKey);
+
+    res.send(token);
   } catch (error) {
     console.error(error.message);
     res.status(400).send("Registration Failed");
