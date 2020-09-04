@@ -3,14 +3,19 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Landing from "../../components/layout/landing/Landing";
 import { loginUser } from "../../redux/actions/auth";
+import Alert from "../../components/alert/Alert";
+
+import { showAlert } from "../../redux/actions/alert";
 
 import "./Signin.scss";
 
-const Signin = ({ loginUser, authenticated }) => {
+const Signin = ({ loginUser, authenticated, showAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { email, password } = formData;
 
   const onChange = (e) => {
     setFormData({
@@ -21,10 +26,11 @@ const Signin = ({ loginUser, authenticated }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!email || !password) return showAlert("Invalid credentials");
+
     loginUser(formData);
   };
-
-  const { email, password } = formData;
 
   if (authenticated) return <Redirect to="/" />;
 
@@ -34,6 +40,7 @@ const Signin = ({ loginUser, authenticated }) => {
       <div className="signin-page">
         <div className="signin-form">
           <h2>Sign in to your account</h2>
+          <Alert />
           <form onSubmit={onSubmit}>
             <div className="form-item">
               <label htmlFor="email">Email</label>
@@ -75,4 +82,4 @@ const mapStateToProps = ({ auth: { authenticated } }) => ({
   authenticated,
 });
 
-export default connect(mapStateToProps, { loginUser })(Signin);
+export default connect(mapStateToProps, { loginUser, showAlert })(Signin);
