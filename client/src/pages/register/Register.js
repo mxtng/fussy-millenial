@@ -1,15 +1,16 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Alert from "../../components/alert/Alert";
 
 import { connect } from "react-redux";
 import { showAlert } from "../../redux/actions/alert";
+import { registerUser } from "../../redux/actions/auth";
 
 import Landing from "../../components/layout/landing/Landing";
 
 import "./Register.scss";
 
-const Register = ({ showAlert }) => {
+const Register = ({ showAlert, registerUser, authenticated }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -32,8 +33,13 @@ const Register = ({ showAlert }) => {
     if (password !== password2) {
       return showAlert("Password do not match.");
     }
-    console.log("Registration Successful!");
+
+    registerUser(form);
   };
+
+  useEffect(() => {
+    if (authenticated) return console.log("Registration Successful!");
+  }, [authenticated]);
 
   return (
     <Fragment>
@@ -98,4 +104,8 @@ const Register = ({ showAlert }) => {
   );
 };
 
-export default connect(null, { showAlert })(Register);
+const mapStateToProps = ({ auth: { authenticated } }) => ({
+  authenticated,
+});
+
+export default connect(mapStateToProps, { showAlert, registerUser })(Register);
