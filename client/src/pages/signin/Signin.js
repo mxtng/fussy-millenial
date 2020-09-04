@@ -1,15 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Landing from "../../components/layout/landing/Landing";
 import { loginUser } from "../../redux/actions/auth";
 import Alert from "../../components/alert/Alert";
 
-import { showAlert } from "../../redux/actions/alert";
+import { showAlert, hideAlert } from "../../redux/actions/alert";
 
 import "./Signin.scss";
 
-const Signin = ({ loginUser, authenticated, showAlert }) => {
+const Signin = ({ loginUser, authenticated, showAlert, hideAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,6 +31,12 @@ const Signin = ({ loginUser, authenticated, showAlert }) => {
 
     loginUser(formData);
   };
+
+  useEffect(() => {
+    return () => {
+      hideAlert();
+    }
+  })
 
   if (authenticated) return <Redirect to="/" />;
 
@@ -82,4 +88,4 @@ const mapStateToProps = ({ auth: { authenticated } }) => ({
   authenticated,
 });
 
-export default connect(mapStateToProps, { loginUser, showAlert })(Signin);
+export default connect(mapStateToProps, { loginUser, showAlert, hideAlert })(Signin);
