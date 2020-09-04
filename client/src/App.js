@@ -17,7 +17,7 @@ const App = () => {
 	return (
 		<div className="App">
 			<Provider store={store}>
-				<Router basename="/fussy-millenial">
+				<Router>
 					<Navbar />
 					<Switch>
 						<Route exact path="/" component={Main} />
