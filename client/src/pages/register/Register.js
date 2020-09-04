@@ -1,16 +1,16 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Alert from "../../components/alert/Alert";
 
 import { connect } from "react-redux";
-import { showAlert } from "../../redux/actions/alert";
+import { showAlert, hideAlert } from "../../redux/actions/alert";
 import { registerUser } from "../../redux/actions/auth";
 
 import Landing from "../../components/layout/landing/Landing";
 
 import "./Register.scss";
 
-const Register = ({ showAlert, registerUser, authenticated }) => {
+const Register = ({ showAlert, hideAlert, registerUser, authenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,12 +30,21 @@ const Register = ({ showAlert, registerUser, authenticated }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    if (!name) return showAlert("Name required.");
+    if (!email) return showAlert("Email required.");
+    if (!password) return showAlert("Password required.");
+    if (!password2) return showAlert("Confirm Password required.");
+
     if (password !== password2) {
       return showAlert("Password do not match.");
     }
 
     registerUser(formData);
   };
+
+  useEffect(() => () => {
+    hideAlert();
+  });
 
   if (authenticated) return <Redirect to="/" />;
 
@@ -106,4 +115,6 @@ const mapStateToProps = ({ auth: { authenticated } }) => ({
   authenticated,
 });
 
-export default connect(mapStateToProps, { showAlert, registerUser })(Register);
+export default connect(mapStateToProps, { showAlert, hideAlert, registerUser })(
+  Register
+);
