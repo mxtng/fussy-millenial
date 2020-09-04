@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import Alert from "../../components/alert/Alert";
 
 import { connect } from "react-redux";
@@ -11,18 +11,18 @@ import Landing from "../../components/layout/landing/Landing";
 import "./Register.scss";
 
 const Register = ({ showAlert, registerUser, authenticated }) => {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = form;
+  const { name, email, password, password2 } = formData;
 
   const onChange = (e) => {
-    setForm({
-      ...form,
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value,
     });
   };
@@ -34,12 +34,10 @@ const Register = ({ showAlert, registerUser, authenticated }) => {
       return showAlert("Password do not match.");
     }
 
-    registerUser(form);
+    registerUser(formData);
   };
 
-  useEffect(() => {
-    if (authenticated) return console.log("Registration Successful!");
-  }, [authenticated]);
+  if (authenticated) return <Redirect to="/" />;
 
   return (
     <Fragment>
