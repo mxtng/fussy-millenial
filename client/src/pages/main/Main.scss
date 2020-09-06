@@ -6,9 +6,10 @@
   height: 100vh;
 
   .title {
+    font-family: 'Chewy', cursive;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: grey;
+    color: #eea950;
     opacity: 0.8;
   }
 
@@ -17,7 +18,7 @@
     flex-direction: column;
     align-items: center;
     width: 70vw;
-    background: orange;
+    background: #eea950;
     padding: 0.9rem;
     border-radius: 0.4rem;
 

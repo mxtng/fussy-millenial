@@ -11,7 +11,7 @@ const Main = () => {
     <Fragment>
       <Landing />
       <div className="main-page">
-        <h1 className="title">Fussy Millenial</h1>
+        <h1 className="title">fussy millenial</h1>
         <div className="search-container">
           <Alert />
           <Search />
