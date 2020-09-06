@@ -9,8 +9,8 @@ import { withRouter } from "react-router-dom";
 import "./Search.scss";
 
 const Search = ({
+  loading,
   ingredients,
-
   fetchRecipes,
   showAlert,
   hideAlert,
@@ -21,7 +21,9 @@ const Search = ({
 
   useEffect(() => {
     if (ingredients) return setIngredientList(ingredients);
-  }, [ingredients]);
+
+    !loading && setIngredientList("");
+  }, [loading, ingredients]);
 
   useEffect(() => {
     return () => {
@@ -34,7 +36,7 @@ const Search = ({
   };
 
   const findRecipes = () => {
-    if (!ingredientList) return showAlert("Please enter ingredients.");
+    if (!ingredientList) return showAlert("Please enter ingredients");
 
     fetchRecipes(ingredientList);
 
@@ -60,7 +62,8 @@ const Search = ({
   );
 };
 
-const mapStateToProps = ({ recipe: { ingredients } }) => ({
+const mapStateToProps = ({ recipe: { loading, ingredients } }) => ({
+  loading,
   ingredients,
 });
 

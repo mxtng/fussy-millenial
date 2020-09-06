@@ -31,6 +31,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         recipes: [payload],
+        ingredients: null
       };
 
     case RECIPE_FAILURE:
