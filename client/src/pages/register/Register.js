@@ -30,11 +30,6 @@ const Register = ({ showAlert, hideAlert, registerUser, authenticated }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!name) return showAlert("Name required.");
-    if (!email) return showAlert("Email required.");
-    if (!password) return showAlert("Password required.");
-    if (!password2) return showAlert("Confirm Password required.");
-
     if (password !== password2) {
       return showAlert("Password do not match.");
     }
@@ -77,7 +72,7 @@ const Register = ({ showAlert, hideAlert, registerUser, authenticated }) => {
               />
             </div>
             <div className="form-item">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Password (min. 6 characters)</label>
               <input
                 type="password"
                 name="password"

@@ -7,6 +7,8 @@ import {
   LOGOUT,
 } from "./types";
 
+import { showAlert } from "../actions/alert";
+
 export const registerUser = ({ name, email, password }) => async (dispatch) => {
   try {
     const res = await axios.post("/api/users/register", {
@@ -21,7 +23,12 @@ export const registerUser = ({ name, email, password }) => async (dispatch) => {
     });
   } catch (error) {
     console.error(error.message);
-    // register failure
+
+    dispatch(showAlert("Please verify details"));
+
+    dispatch({
+      type: REGISTER_FAILURE,
+    });
   }
 };
 
@@ -38,7 +45,12 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
     });
   } catch (error) {
     console.error(error.message);
-    // login failure
+
+    dispatch(showAlert("Invalid Credentials"));
+
+    dispatch({
+      type: LOGIN_FAILURE,
+    });
   }
 };
 
