@@ -13,6 +13,7 @@ const RecipeItem = ({
       <div className="recipe-item">
         <img className="card-img-top" src={image} alt="" />
         <div className="card-body">
+            <div className="btn-blocks">{children}</div>
           <h5 className="card-title">{title}</h5>
           <h6>Primary ingredients:</h6>
           <ul>
@@ -27,7 +28,6 @@ const RecipeItem = ({
             ))}
           </ul>
 
-          <div className="btn-blocks">{children}</div>
         </div>
       </div>
     </Fragment>

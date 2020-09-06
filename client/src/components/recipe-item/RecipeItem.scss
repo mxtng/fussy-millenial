@@ -1,5 +1,7 @@
 .recipe-item {
-	border: 1px solid orange;
+	border-top: 2px solid #eea950;
+	border-right: 2px solid #eea950;
+	padding: 1rem;
 	border-radius: 0.2rem;
 	margin: 0.4rem;
 	width: 99%;
@@ -8,6 +10,7 @@
 		padding: 0.4rem;
 		display: flex;
 		justify-content: space-evenly;
+		margin-bottom: 1rem;
 
 		.btn {
 			width: 50%;
