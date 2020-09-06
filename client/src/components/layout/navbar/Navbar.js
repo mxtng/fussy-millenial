@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../../redux/actions/auth";
@@ -6,14 +6,19 @@ import { logoutUser } from "../../../redux/actions/auth";
 import "./Navbar.scss";
 
 const Navbar = ({ authenticated, logoutUser }) => {
-  console.log(authenticated);
+  const [checked, setChecked] = useState(false);
   return (
     <nav
       className="navbar block navbar-expand-md
    navbar-dark bg-dark"
     >
       <div className="container-lg">
-        <input type="checkbox" id="navbar-toggler-checkbox" />
+        <input
+          type="checkbox"
+          id="navbar-toggler-checkbox"
+          checked={checked}
+          onChange={() => setChecked(!checked)}
+        />
         <label
           htmlFor="navbar-toggler-checkbox"
           className="navbar-toggler-checkbox"
@@ -27,31 +32,55 @@ const Navbar = ({ authenticated, logoutUser }) => {
           <span className="navbar-toggler-icon" />
         </label>
 
-        <Link className="navbar-brand h1" to="/">
+        <Link
+          className="navbar-brand h1"
+          to="/"
+          onClick={() => setChecked(false)}
+        >
           Fussy Millenial
         </Link>
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
           <div className="navbar-nav">
-            <Link className="nav-link" to="/recipes">
+            <Link
+              className="nav-link"
+              to="/recipes"
+              onClick={() => setChecked(false)}
+            >
               Recipes
             </Link>
           </div>
           <div className="navbar-nav ml-auto">
-            <Link className="nav-link" to="/favourites">
+            <Link
+              className="nav-link"
+              to="/favourites"
+              onClick={() => setChecked(false)}
+            >
               Favourites
             </Link>
             {!authenticated ? (
               <Fragment>
-                <Link className="nav-link" to="/register">
+                <Link
+                  className="nav-link"
+                  to="/register"
+                  onClick={() => setChecked(false)}
+                >
                   Register
                 </Link>
-                <Link className="nav-link" to="/signin">
+                <Link
+                  className="nav-link"
+                  to="/signin"
+                  onClick={() => setChecked(false)}
+                >
                   Sign In
                 </Link>
               </Fragment>
             ) : (
-              <button type="button" className="nav-link logout-btn" onClick={logoutUser}>
+              <button
+                type="button"
+                className="nav-link logout-btn"
+                onClick={logoutUser}
+              >
                 Sign Out
               </button>
             )}
