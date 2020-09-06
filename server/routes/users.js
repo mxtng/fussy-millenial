@@ -52,27 +52,32 @@ router.post(
 );
 
 // User Login
-router.post("/login", [
-  check('email').isEmail(),
-  check('password').exists()
-],async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findOne({ email });
+router.post(
+  "/login",
+  [check("email").isEmail(), check("password").exists()],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { email, password } = req.body;
+    try {
+      const user = await User.findOne({ email });
 
-    if (!user) return res.status(400).send("Invalid Credentials");
+      if (!user) return res.status(400).send("Invalid Credentials");
 
-    const verification = await bcrypt.compare(password, user.password);
+      const verification = await bcrypt.compare(password, user.password);
 
-    if (!verification) return res.status(400).send("Invalid Credentials");
+      if (!verification) return res.status(400).send("Invalid Credentials");
 
-    const token = jwt.sign({ id: user.id }, secretKey);
+      const token = jwt.sign({ id: user.id }, secretKey);
 
-    res.send(token);
-  } catch (error) {
-    console.error(error.message);
-    res.status(400).send("Login Failed");
+      res.send(token);
+    } catch (error) {
+      console.error(error.message);
+      res.status(400).send("Login Failed");
+    }
   }
-});
+);
 
 module.exports = router;
