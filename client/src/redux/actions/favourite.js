@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UPDATE_FAVOURITE, DELETE_FAVOURITE } from "./types";
+import { UPDATE_FAVOURITE, DELETE_FAVOURITE, CLEAR_FAVOURITE } from "./types";
 
 export const updateUserFavourite = (recipe) => async (dispatch) => {
   try {
@@ -37,4 +37,8 @@ export const updateFavourite = (recipe) => ({
 export const deleteFavourite = (recipeId) => ({
   type: DELETE_FAVOURITE,
   payload: recipeId,
+});
+
+export const clearFavourite = () => ({
+  type: CLEAR_FAVOURITE,
 });

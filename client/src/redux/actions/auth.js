@@ -8,6 +8,7 @@ import {
 } from "./types";
 
 import { showAlert } from "../actions/alert";
+import { clearFavourite } from "../actions/favourite";
 
 export const registerUser = ({ name, email, password }) => async (dispatch) => {
   try {
@@ -39,6 +40,8 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
       password,
     });
 
+    dispatch(clearFavourite());
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
@@ -54,6 +57,10 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
   }
 };
 
-export const logoutUser = () => ({
-  type: LOGOUT,
-});
+export const logoutUser = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
+
+  dispatch(clearFavourite());
+};
