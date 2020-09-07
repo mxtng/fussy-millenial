@@ -1,18 +1,24 @@
 import React from "react";
 import "./Favourites.scss";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import RecipeItem from "../../components/recipe-item/RecipeItem";
 
 import { removeFavourite } from "../../redux/actions/recipe";
 
-const Favourites = ({ favourites, removeFavourite }) => {
+const Favourites = ({ authenticated, favourites, removeFavourite }) => {
   const clickRemove = (id) => {
     removeFavourite(id);
   };
 
   return (
     <div className="favourite-page">
+      {!authenticated && (
+        <p className='warning alert alert-danger'>
+          <Link to="/signin">Sign in</Link> to save favourite recipes
+        </p>
+      )}
       <h2 className="title">Favourite Recipes</h2>
       <div className="recipe-list container-xl">
         {favourites.length > 0 ? (
@@ -43,7 +49,11 @@ const Favourites = ({ favourites, removeFavourite }) => {
   );
 };
 
-const mapStateToProps = ({ recipe: { favourites } }) => ({
+const mapStateToProps = ({
+  auth: { authenticated },
+  recipe: { favourites },
+}) => ({
+  authenticated,
   favourites,
 });
 
