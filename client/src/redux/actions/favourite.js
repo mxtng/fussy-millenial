@@ -1,7 +1,7 @@
 import axios from "axios";
 import { UPDATE_FAVOURITE, DELETE_FAVOURITE } from "./types";
 
-export const updateFavourite = (recipe) => async (dispatch) => {
+export const updateUserFavourite = (recipe) => async (dispatch) => {
   try {
     const { id, image, title, usedIngredients, missedIngredients } = recipe;
 
@@ -13,24 +13,28 @@ export const updateFavourite = (recipe) => async (dispatch) => {
       missedIngredients,
     });
 
-    dispatch({
-      type: UPDATE_FAVOURITE,
-      payload: recipe,
-    });
+    dispatch(updateFavourite(recipe));
   } catch (error) {
     console.error(error.message);
   }
 };
 
-export const deleteFavourite = (recipeId) => async (dispatch) => {
+export const deleteUserFavourite = (recipeId) => async (dispatch) => {
   try {
     await axios.delete(`api/favourites/${recipeId}`);
 
-    dispatch({
-      type: DELETE_FAVOURITE,
-      payload: recipeId,
-    });
+    dispatch(deleteFavourite(recipeId));
   } catch (error) {
     console.error(error.message);
   }
 };
+
+export const updateFavourite = (recipe) => ({
+  type: UPDATE_FAVOURITE,
+  payload: recipe,
+});
+
+export const deleteFavourite = (recipeId) => ({
+  type: DELETE_FAVOURITE,
+  payload: recipeId,
+});

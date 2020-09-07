@@ -3,13 +3,25 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import RecipeItem from "../../components/recipe-item/RecipeItem";
-import { deleteFavourite } from "../../redux/actions/favourite";
+import {
+  deleteFavourite,
+  deleteUserFavourite,
+} from "../../redux/actions/favourite";
 
 import "./Favourites.scss";
 
-const Favourites = ({ authenticated, favourites, deleteFavourite }) => {
+const Favourites = ({
+  authenticated,
+  favourites,
+  deleteFavourite,
+  deleteUserFavourite,
+}) => {
   const clickRemove = (recipeId) => {
-    deleteFavourite(recipeId);
+    if (!authenticated) {
+      return deleteFavourite(recipeId);
+    }
+
+    deleteUserFavourite(recipeId);
   };
 
   return (
@@ -57,4 +69,7 @@ const mapStateToProps = ({
   favourites,
 });
 
-export default connect(mapStateToProps, { deleteFavourite })(Favourites);
+export default connect(mapStateToProps, {
+  deleteFavourite,
+  deleteUserFavourite,
+})(Favourites);

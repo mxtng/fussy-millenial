@@ -5,13 +5,26 @@ import Alert from "../../components/alert/Alert";
 import Search from "../../components/search/Search";
 import Spinner from "../../components/spinner/Spinner";
 import RecipeItem from "../../components/recipe-item/RecipeItem";
-import { updateFavourite } from "../../redux/actions/favourite";
+import {
+  updateFavourite,
+  updateUserFavourite,
+} from "../../redux/actions/favourite";
 
 import "./Recipes.scss";
 
-const Recipes = ({ loading, recipes, updateFavourite }) => {
+const Recipes = ({
+  authenticated,
+  loading,
+  recipes,
+  updateFavourite,
+  updateUserFavourite,
+}) => {
   const favClick = (recipe) => {
-    updateFavourite(recipe);
+    if (!authenticated) {
+      return updateFavourite(recipe);
+    }
+
+    updateUserFavourite(recipe);
   };
 
   return (
@@ -55,7 +68,11 @@ const Recipes = ({ loading, recipes, updateFavourite }) => {
   );
 };
 
-const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
+const mapStateToProps = ({
+  auth: { authenticated },
+  recipe: { loading, ingredients, recipes },
+}) => ({
+  authenticated,
   loading,
   ingredients,
   recipes,
@@ -63,4 +80,5 @@ const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
 
 export default connect(mapStateToProps, {
   updateFavourite,
+  updateUserFavourite,
 })(Recipes);
