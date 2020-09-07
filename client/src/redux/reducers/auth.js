@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
   switch (type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
+      localStorage.setItem("token", payload);
       return {
         ...state,
         token: payload,
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
     case REGISTER_FAILURE:
     case LOGIN_FAILURE:
     case LOGOUT:
+      localStorage.removeItem("token");
       return {
         ...state,
         authenticated: false,

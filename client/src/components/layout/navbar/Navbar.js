@@ -7,6 +7,12 @@ import "./Navbar.scss";
 
 const Navbar = ({ authenticated, logoutUser }) => {
   const [checked, setChecked] = useState(false);
+
+  const logoutClicked = () => {
+    setChecked(false);
+    logoutUser();
+  };
+
   return (
     <nav
       className="navbar block navbar-expand-md
@@ -79,7 +85,7 @@ const Navbar = ({ authenticated, logoutUser }) => {
               <button
                 type="button"
                 className="nav-link logout-btn"
-                onClick={logoutUser}
+                onClick={logoutClicked}
               >
                 Sign Out
               </button>
