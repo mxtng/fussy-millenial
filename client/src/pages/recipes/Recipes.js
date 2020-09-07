@@ -1,19 +1,17 @@
 import React, { Fragment } from "react";
-import "./Recipes.scss";
 import { connect } from "react-redux";
 
 import Alert from "../../components/alert/Alert";
 import Search from "../../components/search/Search";
 import Spinner from "../../components/spinner/Spinner";
-
-import { updateFavourite, removeFavourite } from "../../redux/actions/recipe";
-import { saveRecipe } from "../../redux/actions/favourite";
 import RecipeItem from "../../components/recipe-item/RecipeItem";
+import { updateFavourite } from "../../redux/actions/favourite";
 
-const Recipes = ({ loading, recipes, updateFavourite, saveRecipe }) => {
+import "./Recipes.scss";
+
+const Recipes = ({ loading, recipes, updateFavourite }) => {
   const favClick = (recipe) => {
     updateFavourite(recipe);
-    saveRecipe(recipe);
   };
 
   return (
@@ -64,7 +62,5 @@ const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
 });
 
 export default connect(mapStateToProps, {
-  saveRecipe,
   updateFavourite,
-  removeFavourite,
 })(Recipes);

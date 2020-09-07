@@ -1,21 +1,24 @@
-import { SAVE_FAVOURITE, REMOVE_FAVOURITE } from "../actions/types";
+import { UPDATE_FAVOURITE, DELETE_FAVOURITE } from "../actions/types";
 
 const initialState = {
-  favourite: [],
+  favourites: [],
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case SAVE_FAVOURITE:
+    case UPDATE_FAVOURITE:
       return {
         ...state,
-        favourite: [payload],
+        favourites: state.favourites.some(({ id }) => id === payload.id)
+          ? state.favourites
+          : [...state.favourites, payload],
       };
-    case REMOVE_FAVOURITE:
+    case DELETE_FAVOURITE:
       return {
         ...state,
+        favourites: state.favourites.filter(({ id }) => id !== payload),
       };
     default:
       return state;

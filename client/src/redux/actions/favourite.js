@@ -1,10 +1,20 @@
 import axios from "axios";
-import { SAVE_FAVOURITE, REMOVE_FAVOURITE } from "./types";
+import { UPDATE_FAVOURITE, DELETE_FAVOURITE } from "./types";
 
-export const saveRecipe = (recipe) => async (dispatch) => {
+export const updateFavourite = (recipe) => async (dispatch) => {
   try {
+    const { id, image, title, usedIngredients, missedIngredients } = recipe;
+
+    await axios.put("api/favourites", {
+      id,
+      image,
+      title,
+      usedIngredients,
+      missedIngredients,
+    });
+
     dispatch({
-      type: SAVE_FAVOURITE,
+      type: UPDATE_FAVOURITE,
       payload: recipe,
     });
   } catch (error) {
@@ -12,13 +22,17 @@ export const saveRecipe = (recipe) => async (dispatch) => {
   }
 };
 
-export const removeRecipe = (recipeId) => async (dispatch) => {
+export const deleteFavourite = (recipeId) => async (dispatch) => {
   try {
+    await axios.delete("api/favourites", {
+      recipeId,
+    });
+
+    dispatch({
+      type: DELETE_FAVOURITE,
+      payload: recipeId,
+    });
   } catch (error) {
     console.error(error.message);
   }
 };
-
-// favourite
-// save to db
-// 

@@ -1,33 +1,33 @@
 import React from "react";
-import "./Favourites.scss";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import RecipeItem from "../../components/recipe-item/RecipeItem";
+import { deleteFavourite } from "../../redux/actions/favourite";
 
-import { removeFavourite } from "../../redux/actions/recipe";
+import "./Favourites.scss";
 
-const Favourites = ({ authenticated, favourites, removeFavourite }) => {
-  const clickRemove = (id) => {
-    removeFavourite(id);
+const Favourites = ({ authenticated, favourites, deleteFavourite }) => {
+  const clickRemove = (recipeId) => {
+    deleteFavourite(recipeId);
   };
 
   return (
     <div className="favourite-page">
       {!authenticated && (
-        <p className='warning alert alert-danger'>
+        <p className="warning alert alert-danger">
           <Link to="/signin">Sign in</Link> to save favourite recipes
         </p>
       )}
       <h2 className="title">Favourite Recipes</h2>
       <div className="recipe-list container-xl">
         {favourites.length > 0 ? (
-          favourites.map((item, index) => (
-            <RecipeItem key={index} {...item}>
+          favourites.map((item) => (
+            <RecipeItem key={item.id} {...item}>
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => clickRemove(index)}
+                onClick={() => clickRemove(item.id)}
               >
                 Remove
               </button>
@@ -35,7 +35,7 @@ const Favourites = ({ authenticated, favourites, removeFavourite }) => {
                 type="button"
                 name="favourite"
                 className="btn btn-secondary"
-                onClick={() => console.log("clicked Detail")}
+                onClick={() => console.log("Detail Button Clicked")}
               >
                 Details
               </button>
@@ -51,10 +51,10 @@ const Favourites = ({ authenticated, favourites, removeFavourite }) => {
 
 const mapStateToProps = ({
   auth: { authenticated },
-  recipe: { favourites },
+  favourite: { favourites },
 }) => ({
   authenticated,
   favourites,
 });
 
-export default connect(mapStateToProps, { removeFavourite })(Favourites);
+export default connect(mapStateToProps, { deleteFavourite })(Favourites);

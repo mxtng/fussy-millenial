@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-  RECIPE_REQUEST,
-  RECIPE_SUCCESS,
-  RECIPE_FAILURE,
-  UPDATE_FAVOURITE,
-  REMOVE_FAVOURITE,
-} from "./types";
+import { RECIPE_REQUEST, RECIPE_SUCCESS, RECIPE_FAILURE } from "./types";
 
 export const fetchRecipes = (ingredients) => async (dispatch) => {
   try {
@@ -39,19 +33,5 @@ export const recipeSuccess = (recipes) => {
 export const recipeFailure = () => {
   return {
     type: RECIPE_FAILURE,
-  };
-};
-
-export const updateFavourite = (id) => {
-  return {
-    type: UPDATE_FAVOURITE,
-    payload: id,
-  };
-};
-
-export const removeFavourite = (id) => {
-  return {
-    type: REMOVE_FAVOURITE,
-    payload: id,
   };
 };
