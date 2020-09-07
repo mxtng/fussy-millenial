@@ -7,12 +7,13 @@ import Search from "../../components/search/Search";
 import Spinner from "../../components/spinner/Spinner";
 
 import { updateFavourite, removeFavourite } from "../../redux/actions/recipe";
+import { saveRecipe } from "../../redux/actions/favourite";
 import RecipeItem from "../../components/recipe-item/RecipeItem";
 
-const Recipes = ({ loading, recipes, updateFavourite }) => {
-  const favClick = (id) => {
-    console.log(id);
-    updateFavourite(id);
+const Recipes = ({ loading, recipes, updateFavourite, saveRecipe }) => {
+  const favClick = (recipe) => {
+    updateFavourite(recipe);
+    saveRecipe(recipe);
   };
 
   return (
@@ -43,7 +44,7 @@ const Recipes = ({ loading, recipes, updateFavourite }) => {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => console.log("clicked Detail")}
+                  onClick={() => console.log("Detail Button Clicked")}
                 >
                   Details
                 </button>
@@ -63,6 +64,7 @@ const mapStateToProps = ({ recipe: { loading, ingredients, recipes } }) => ({
 });
 
 export default connect(mapStateToProps, {
+  saveRecipe,
   updateFavourite,
   removeFavourite,
 })(Recipes);
