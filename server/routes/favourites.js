@@ -2,13 +2,24 @@ const express = require("express");
 const router = express.Router();
 
 const Recipe = require("../models/recipe");
+const User = require("../models/user");
 
-router.put("/", async (req, res) => {
+const auth = require("../auth/auth");
+
+router.put("/", auth, async (req, res) => {
   try {
-    const { id, image, title, usedIngredients, missedIngredients } = req.body;
+    const {
+      id,
+      userId,
+      image,
+      title,
+      usedIngredients,
+      missedIngredients,
+    } = req.body;
 
     const recipe = new Recipe({
-      _id: id,
+      user: userId,
+      recipeId: id,
       image,
       title,
       usedIngredients,
@@ -18,6 +29,17 @@ router.put("/", async (req, res) => {
     await recipe.save();
 
     res.send(req.body);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const { user } = req.body;
+
+    const recipes = await Recipe.find({ user }).select("-_id -user -__v");
+    res.send(recipes);
   } catch (error) {
     console.error(error.message);
   }
