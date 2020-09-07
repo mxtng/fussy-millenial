@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require("axios");
 const apiKey = require("../config/db").apiKey;
 
-const Recipe = require("../models/recipes");
+const Recipe = require("../models/recipe");
 
 router.post("/", async (req, res) => {
   try {
