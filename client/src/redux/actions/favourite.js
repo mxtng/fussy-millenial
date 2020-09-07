@@ -24,9 +24,7 @@ export const updateFavourite = (recipe) => async (dispatch) => {
 
 export const deleteFavourite = (recipeId) => async (dispatch) => {
   try {
-    await axios.delete("api/favourites", {
-      recipeId,
-    });
+    await axios.delete(`api/favourites/${recipeId}`);
 
     dispatch({
       type: DELETE_FAVOURITE,
