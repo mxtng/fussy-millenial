@@ -6,11 +6,22 @@ const User = require("../models/user");
 
 const auth = require("../auth/auth");
 
+router.get("/", auth, async (req, res) => {
+  try {
+    const { user } = req.body;
+
+    const recipes = await Recipe.find({ user }).select("-_id -user -__v");
+    res.send(recipes);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 router.put("/", auth, async (req, res) => {
   try {
     const {
       id,
-      userId,
+      user,
       image,
       title,
       usedIngredients,
@@ -18,7 +29,7 @@ router.put("/", auth, async (req, res) => {
     } = req.body;
 
     const recipe = new Recipe({
-      user: userId,
+      user,
       recipeId: id,
       image,
       title,
@@ -34,26 +45,17 @@ router.put("/", auth, async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     const { user } = req.body;
+    await Recipe.findOneAndDelete({ user, recipeId: req.params.id });
 
-    const recipes = await Recipe.find({ user }).select("-_id -user -__v");
-    res.send(recipes);
-  } catch (error) {
-    console.error(error.message);
-  }
-});
+    // if (!recipe) return res.status(400).send("Recipe not found");
 
-router.delete("/:id", async (req, res) => {
-  try {
-    const recipe = await Recipe.findById(req.params.id);
-
-    if (!recipe) return res.status(400).send("Recipe not found");
-
-    await recipe.remove();
+    // await recipe.remove();
 
     res.send("Favourite recipe removed");
+    // res.send(recipe);
   } catch (error) {
     console.error(error.message);
   }
