@@ -6,13 +6,14 @@ import { logoutUser } from "../../../redux/actions/auth";
 import "./Navbar.scss";
 
 const Navbar = ({ authenticated, logoutUser }) => {
-  const [checked, setChecked] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
-  const logoutClicked = () => {
-    setChecked(false);
+  const logout = () => {
+    setDropdown(false);
     logoutUser();
   };
 
+  console.log(authenticated);
   return (
     <nav
       className="navbar block navbar-expand-md
@@ -22,8 +23,8 @@ const Navbar = ({ authenticated, logoutUser }) => {
         <input
           type="checkbox"
           id="navbar-toggler-checkbox"
-          checked={checked}
-          onChange={() => setChecked(!checked)}
+          checked={dropdown}
+          onChange={() => setDropdown(!dropdown)}
         />
         <label
           htmlFor="navbar-toggler-checkbox"
@@ -41,7 +42,7 @@ const Navbar = ({ authenticated, logoutUser }) => {
         <Link
           className="navbar-brand h1"
           to="/"
-          onClick={() => setChecked(false)}
+          onClick={() => setDropdown(false)}
         >
           Fussy Millenial
         </Link>
@@ -51,7 +52,7 @@ const Navbar = ({ authenticated, logoutUser }) => {
             <Link
               className="nav-link"
               to="/recipes"
-              onClick={() => setChecked(false)}
+              onClick={() => setDropdown(false)}
             >
               Recipes
             </Link>
@@ -60,7 +61,7 @@ const Navbar = ({ authenticated, logoutUser }) => {
             <Link
               className="nav-link"
               to="/favourites"
-              onClick={() => setChecked(false)}
+              onClick={() => setDropdown(false)}
             >
               Favourites
             </Link>
@@ -69,14 +70,14 @@ const Navbar = ({ authenticated, logoutUser }) => {
                 <Link
                   className="nav-link"
                   to="/register"
-                  onClick={() => setChecked(false)}
+                  onClick={() => setDropdown(false)}
                 >
                   Register
                 </Link>
                 <Link
                   className="nav-link"
                   to="/signin"
-                  onClick={() => setChecked(false)}
+                  onClick={() => setDropdown(false)}
                 >
                   Sign In
                 </Link>
@@ -85,7 +86,7 @@ const Navbar = ({ authenticated, logoutUser }) => {
               <button
                 type="button"
                 className="nav-link logout-btn"
-                onClick={logoutClicked}
+                onClick={logout}
               >
                 Sign Out
               </button>
