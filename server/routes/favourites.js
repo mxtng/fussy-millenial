@@ -20,7 +20,7 @@ router.get("/", auth, async (req, res) => {
 router.put("/", auth, async (req, res) => {
   try {
     const {
-      id,
+      recipeId,
       user,
       image,
       title,
@@ -30,7 +30,7 @@ router.put("/", auth, async (req, res) => {
 
     const recipe = new Recipe({
       user,
-      recipeId: id,
+      recipeId,
       image,
       title,
       usedIngredients,
