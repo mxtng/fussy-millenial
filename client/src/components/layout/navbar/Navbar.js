@@ -13,7 +13,6 @@ const Navbar = ({ authenticated, logoutUser }) => {
     logoutUser();
   };
 
-  console.log(authenticated);
   return (
     <nav
       className="navbar block navbar-expand-md

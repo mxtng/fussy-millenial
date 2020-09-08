@@ -4,12 +4,24 @@ import {
   REGISTER_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOAD_USER,
   LOGOUT,
 } from "./types";
 
 import { showAlert } from "../actions/alert";
 import { clearFavourite } from "../actions/favourite";
 import { loadUserFavourite } from "../actions/favourite";
+
+export const loadUser = () => async (dispatch) => {
+  if (localStorage.token) {
+    dispatch({
+      type: LOAD_USER,
+      payload: localStorage.token,
+    });
+
+    dispatch(loadUserFavourite());
+  }
+};
 
 export const registerUser = ({ name, email, password }) => async (dispatch) => {
   try {
@@ -47,7 +59,6 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
     });
 
     dispatch(loadUserFavourite());
-    
   } catch (error) {
     console.error(error.message);
 
