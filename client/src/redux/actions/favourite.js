@@ -1,5 +1,30 @@
 import axios from "axios";
-import { UPDATE_FAVOURITE, DELETE_FAVOURITE, CLEAR_FAVOURITE } from "./types";
+import {
+  CLEAR_FAVOURITE,
+  LOAD_FAVOURITE,
+  UPDATE_FAVOURITE,
+  DELETE_FAVOURITE,
+} from "./types";
+
+export const loadUserFavourite = () => async (dispatch) => {
+  try {
+    dispatch(clearFavourite());
+
+    if (!localStorage.token) {
+      return delete axios.defaults.headers.common["token"];
+    }
+    axios.defaults.headers.common["token"] = localStorage.token;
+
+    const res = await axios.get("/api/favourites");
+
+    dispatch({
+      type: LOAD_FAVOURITE,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
 export const updateUserFavourite = (recipe) => async (dispatch) => {
   try {

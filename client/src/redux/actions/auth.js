@@ -9,6 +9,7 @@ import {
 
 import { showAlert } from "../actions/alert";
 import { clearFavourite } from "../actions/favourite";
+import { loadUserFavourite } from "../actions/favourite";
 
 export const registerUser = ({ name, email, password }) => async (dispatch) => {
   try {
@@ -40,12 +41,13 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
       password,
     });
 
-    dispatch(clearFavourite());
-
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+
+    dispatch(loadUserFavourite());
+    
   } catch (error) {
     console.error(error.message);
 

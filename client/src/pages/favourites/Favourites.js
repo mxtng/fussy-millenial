@@ -35,7 +35,7 @@ const Favourites = ({
       <div className="recipe-list container-xl">
         {favourites.length > 0 ? (
           favourites.map((item) => (
-            <RecipeItem key={item.id} {...item}>
+            <RecipeItem key={item.recipeId} {...item}>
               <button
                 type="button"
                 className="btn btn-secondary"
