@@ -24,7 +24,6 @@ router.post("/", async (req, res) => {
         },
       }
     );
-      console.log(fetchRecipes.data);
     res.send(fetchRecipes.data);
   } catch (err) {
     console.error(err.message);
