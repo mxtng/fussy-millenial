@@ -31,11 +31,10 @@ export const updateUserFavourite = (recipe) => async (dispatch) => {
     recipe.recipeId = recipe.id;
     delete recipe.id;
 
+    dispatch(updateFavourite(recipe));
     await axios.put("/api/favourites", {
       ...recipe,
     });
-
-    dispatch(updateFavourite(recipe));
   } catch (error) {
     console.error(error.message);
   }
@@ -43,9 +42,8 @@ export const updateUserFavourite = (recipe) => async (dispatch) => {
 
 export const deleteUserFavourite = (recipeId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/favourites/${recipeId}`);
-
     dispatch(deleteFavourite(recipeId));
+    await axios.delete(`/api/favourites/${recipeId}`);
   } catch (error) {
     console.error(error.message);
   }
