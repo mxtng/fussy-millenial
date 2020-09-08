@@ -28,14 +28,11 @@ export const loadUserFavourite = () => async (dispatch) => {
 
 export const updateUserFavourite = (recipe) => async (dispatch) => {
   try {
-    const { id, image, title, usedIngredients, missedIngredients } = recipe;
+    recipe.recipeId = recipe.id;
+    delete recipe.id;
 
-    await axios.put("api/favourites", {
-      id,
-      image,
-      title,
-      usedIngredients,
-      missedIngredients,
+    await axios.put("/api/favourites", {
+      ...recipe,
     });
 
     dispatch(updateFavourite(recipe));
@@ -46,7 +43,7 @@ export const updateUserFavourite = (recipe) => async (dispatch) => {
 
 export const deleteUserFavourite = (recipeId) => async (dispatch) => {
   try {
-    await axios.delete(`api/favourites/${recipeId}`);
+    await axios.delete(`/api/favourites/${recipeId}`);
 
     dispatch(deleteFavourite(recipeId));
   } catch (error) {

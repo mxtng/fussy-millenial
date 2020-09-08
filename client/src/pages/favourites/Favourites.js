@@ -20,7 +20,6 @@ const Favourites = ({
     if (!authenticated) {
       return deleteFavourite(recipeId);
     }
-
     deleteUserFavourite(recipeId);
   };
 
@@ -39,7 +38,7 @@ const Favourites = ({
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => clickRemove(item.id)}
+                onClick={() => clickRemove(item.recipeId)}
               >
                 Remove
               </button>

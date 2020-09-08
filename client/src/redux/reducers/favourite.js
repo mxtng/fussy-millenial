@@ -21,19 +21,23 @@ export default (state = initialState, action) => {
     case LOAD_FAVOURITE:
       return {
         ...state,
-        favourites: [...payload],
+        favourites: [...payload ],
       };
     case UPDATE_FAVOURITE:
       return {
         ...state,
-        favourites: state.favourites.some(({ id }) => id === payload.id)
+        favourites: state.favourites.some(
+          ({ recipeId }) => recipeId === payload.recipeId
+        )
           ? state.favourites
           : [...state.favourites, payload],
       };
     case DELETE_FAVOURITE:
       return {
         ...state,
-        favourites: state.favourites.filter(({ id }) => id !== payload),
+        favourites: state.favourites.filter(
+          ({ recipeId }) => recipeId !== payload
+        ),
       };
     default:
       return state;
