@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const apiKey = require("../config/db").apiKey;
+// const apiKey = require("../config/db").apiKey;
 
 const Recipe = require("../models/recipe");
 
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
       "https://api.spoonacular.com/recipes/findByIngredients",
       {
         params: {
-          apiKey: process.env.API_KEY || apiKey,
+          apiKey: process.env.API_KEY || require("../config/db").apiKey,
           ingredients,
           number: recipeCount,
         },
