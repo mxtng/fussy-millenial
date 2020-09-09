@@ -2,10 +2,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
-const config = require("./config/db");
-
 mongoose.connect(
-  process.env.MONGODB_URI || config.db,
+  process.env.MONGODB_URI || require("./config/db").db,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (error) => {
     if (error) {
