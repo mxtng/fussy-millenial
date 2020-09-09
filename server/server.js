@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
+const mongoDB = process.env.MONGODB_URI || require("./config/db").db;
+
 mongoose.connect(
-  // process.env.MONGODB_URI || require("./config/db").db,
-  process.env.MONGODB_URI,
+  mongoDB,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (error) => {
     if (error) {
@@ -24,8 +25,8 @@ app.use("/api/users", require("./routes/users"));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "../client/build/")));
 
-  app.get('*', (req, res) => {
-    res.sendFile(__dirname + '../client/build/index.html');
+  app.get("*", (req, res) => {
+    res.sendFile(__dirname + "../client/build/index.html");
   });
 }
 
