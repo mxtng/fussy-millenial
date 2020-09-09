@@ -5,7 +5,7 @@ const app = express();
 const config = require("./config/db");
 
 mongoose.connect(
-  config.db,
+  process.env.MONGODB_URI || config.db,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (error) => {
     if (error) {
@@ -20,6 +20,10 @@ app.use("/api/recipes", require("./routes/recipes"));
 app.use("/api/favourites", require("./routes/favourites"));
 app.use("/api/auth", require("./routes/authentication"));
 app.use("/api/users", require("./routes/users"));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../client/build"));
+}
 
 const PORT = process.env.PORT || 4000;
 

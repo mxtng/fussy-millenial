@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
 
   if (!token) return res.status(400).send("Authorization denied");
 
-  jwt.verify(token, require("../config/db").secretKey, (err, decoded) => {
+  jwt.verify(token, process.env.SECRET_KEY || require("../config/db").secretKey, (err, decoded) => {
     if (err) return res.status(400).send(err);
 
     req.body.user = decoded.id;

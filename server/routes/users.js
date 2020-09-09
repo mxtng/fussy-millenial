@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const secretKey = require("../config/db").secretKey;
+const secretKey = process.env.SECRET_KEY || require("../config/db").secretKey;
 
 const { check, validationResult } = require("express-validator");
 

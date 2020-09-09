@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
       "https://api.spoonacular.com/recipes/findByIngredients",
       {
         params: {
-          apiKey,
+          apiKey: process.env.API_KEY || apiKey,
           ingredients,
           number: recipeCount,
         },
