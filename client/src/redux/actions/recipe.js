@@ -9,6 +9,7 @@ export const fetchRecipes = (ingredients) => async (dispatch) => {
       name: "test_recipes",
       ingredients,
     });
+
     dispatch(recipeSuccess(res.data));
   } catch (error) {
     console.error(error.message);

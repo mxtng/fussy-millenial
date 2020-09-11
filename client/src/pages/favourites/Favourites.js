@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
 import RecipeItem from "../../components/recipe-item/RecipeItem";
 import {
   deleteFavourite,
@@ -33,25 +32,27 @@ const Favourites = ({
       <h2 className="title">Favourite Recipes</h2>
       <div className="recipe-list container-xl">
         {favourites.length > 0 ? (
-          favourites.map((item) => (
-            <RecipeItem key={item.recipeId} {...item}>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => clickRemove(item.recipeId)}
-              >
-                Remove
-              </button>
-              <button
-                type="button"
-                name="favourite"
-                className="btn btn-secondary"
-                onClick={() => console.log("Detail Button Clicked")}
-              >
-                Details
-              </button>
-            </RecipeItem>
-          ))
+          favourites.map((item) => {
+            return (
+              <RecipeItem key={item.recipeId} {...item}>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => clickRemove(item.recipeId)}
+                >
+                  Remove
+                </button>
+                <button
+                  type="button"
+                  name="favourite"
+                  className="btn btn-secondary"
+                  onClick={() => console.log("Detail Button Clicked")}
+                >
+                  Details
+                </button>
+              </RecipeItem>
+            );
+          })
         ) : (
           <p>No favourite recipes found.</p>
         )}

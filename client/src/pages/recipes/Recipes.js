@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-
 import Alert from "../../components/alert/Alert";
 import Search from "../../components/search/Search";
 import Spinner from "../../components/spinner/Spinner";
@@ -20,6 +19,11 @@ const Recipes = ({
   updateUserFavourite,
 }) => {
   const favClick = (recipe) => {
+    // Rename id to recipeId
+    recipe.recipeId = recipe.id;
+    delete recipe.id;
+
+    // Update guest favourite recipes
     if (!authenticated) {
       return updateFavourite(recipe);
     }

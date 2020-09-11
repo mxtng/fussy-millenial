@@ -28,9 +28,6 @@ export const loadUserFavourite = () => async (dispatch) => {
 
 export const updateUserFavourite = (recipe) => async (dispatch) => {
   try {
-    recipe.recipeId = recipe.id;
-    delete recipe.id;
-
     dispatch(updateFavourite(recipe));
     await axios.put("/api/favourites", {
       ...recipe,
