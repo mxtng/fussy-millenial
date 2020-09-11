@@ -1,17 +1,21 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "fussymillennial",
+  "version": "2.0.0",
+  "description": "A recipe search by ingredient app built on MERN stack",
+  "repository": {
+    "type": "svn",
+    "url": "https://github.com/mxtng/fussy-millennial"
+  },
+  "author": "M. Tang",
+  "license": "ISC",
+  "private": "true",
+  "main": "server/server.js",
   "scripts": {
-    "start": "cd server && npm install && npm start",
-    "dev": "concurrently \"npm run server --prefix server\" \"npm start --prefix client\"",
+    "start": "npm start --prefix server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^5.3.0"
-  }
+  "keywords": [
+    "MERN",
+    "spoonacular"
+  ]
 }

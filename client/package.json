@@ -1,8 +1,9 @@
 {
-  "name": "fussy-millenial",
-  "version": "0.1.0",
+  "name": "fussymillenial-client",
+  "version": "2.0.0",
+  "description": "client-side",
   "private": true,
-  "proxy": "http://localhost:4000",
+  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -42,5 +43,6 @@
   },
   "devDependencies": {
     "redux-logger": "^3.0.6"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
