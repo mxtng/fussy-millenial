@@ -43,7 +43,7 @@ const Navbar = ({ authenticated, logoutUser }) => {
           to="/"
           onClick={() => setDropdown(false)}
         >
-          Fussy Millenial
+          Fussy Millennial
         </Link>
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
