@@ -3,6 +3,9 @@ const router = express.Router();
 const axios = require("axios");
 const apiKey = process.env.API_KEY || require("../config/db").apiKey;
 
+// Route: "/api/recipes"
+// Method: POST
+// Description: Fetch recipes from spoonacular
 router.post("/", async (req, res) => {
   try {
     const { ingredients, recipeCount } = req.body;

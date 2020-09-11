@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const User = require("../models/user");
+const { check, validationResult } = require("express-validator");
 const secretKey = process.env.SECRET_KEY || require("../config/db").secretKey;
 
-const { check, validationResult } = require("express-validator");
-
-const User = require("../models/user");
-
-// User Registration
+// Route: "/api/users/register"
+// Method: POST
+// Description: User Registration
 router.post(
   "/register",
   [
@@ -27,7 +26,6 @@ router.post(
 
     try {
       let user = await User.findOne({ email });
-
       if (user) return res.status(400).send("Email already exists");
 
       user = new User({
@@ -51,7 +49,9 @@ router.post(
   }
 );
 
-// User Login
+// Route: "/api/users/login"
+// Method: POST
+// Description: User login
 router.post(
   "/login",
   [check("email").isEmail(), check("password").exists()],
@@ -63,11 +63,9 @@ router.post(
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
-
       if (!user) return res.status(400).send("Invalid Credentials");
 
       const verification = await bcrypt.compare(password, user.password);
-
       if (!verification) return res.status(400).send("Invalid Credentials");
 
       const token = jwt.sign({ id: user.id }, secretKey);

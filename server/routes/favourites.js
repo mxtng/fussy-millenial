@@ -1,15 +1,14 @@
 const express = require("express");
 const router = express.Router();
-
-const Recipe = require("../models/recipe");
-const User = require("../models/user");
-
 const auth = require("../auth/auth");
+const Recipe = require("../models/recipe");
 
+// Route: "/api/favourites"
+// Method: GET
+// Description: Retrieve user's favourite recipe list
 router.get("/", auth, async (req, res) => {
   try {
     const { user } = req.body;
-
     const recipes = await Recipe.find({ user }).select("-_id -user -__v");
     res.send(recipes);
   } catch (error) {
@@ -17,6 +16,9 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Route: "/api/favourites"
+// Method: PUT
+// Description: Update user's favourite recipe list
 router.put("/", auth, async (req, res) => {
   try {
     const {
@@ -45,17 +47,14 @@ router.put("/", auth, async (req, res) => {
   }
 });
 
+// Route: "/api/favourites/:id"
+// Method: DELETE
+// Description: Remove user's favourite recipe
 router.delete("/:id", auth, async (req, res) => {
   try {
     const { user } = req.body;
     await Recipe.findOneAndDelete({ user, recipeId: req.params.id });
-
-    // if (!recipe) return res.status(400).send("Recipe not found");
-
-    // await recipe.remove();
-
     res.send("Favourite recipe removed");
-    // res.send(recipe);
   } catch (error) {
     console.error(error.message);
   }
