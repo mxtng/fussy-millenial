@@ -1,12 +1,10 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
-import Alert from "../../components/alert/Alert";
-
 import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import Landing from "../../components/layout/landing/Landing";
+import Alert from "../../components/alert/Alert";
 import { showAlert, hideAlert } from "../../redux/actions/alert";
 import { registerUser } from "../../redux/actions/auth";
-
-import Landing from "../../components/layout/landing/Landing";
 
 import "./Register.scss";
 
@@ -33,14 +31,17 @@ const Register = ({ showAlert, hideAlert, registerUser, authenticated }) => {
     if (password !== password2) {
       return showAlert("Password do not match.");
     }
-
     registerUser(formData);
   };
 
-  useEffect(() => () => {
-    hideAlert();
-  });
+  // Unsubscribe alert
+  useEffect(() => {
+    return () => {
+      hideAlert();
+    };
+  }, [hideAlert]);
 
+  // Authenticated user redirect to main page
   if (authenticated) return <Redirect to="/" />;
 
   return (

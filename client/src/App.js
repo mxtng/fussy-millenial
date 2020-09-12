@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./redux/store";
-import { loadUser } from "./redux/actions/auth";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/navbar/Navbar";
-
 import Main from "./pages/main/Main";
 import Recipes from "./pages/recipes/Recipes";
 import Favourites from "./pages/favourites/Favourites";
 import Register from "./pages/register/Register";
 import Signin from "./pages/signin/Signin";
+import store from "./redux/store";
+import { loadUser } from "./redux/actions/auth";
 
 import "./App.css";
 

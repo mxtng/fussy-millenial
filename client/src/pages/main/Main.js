@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-
 import Landing from "../../components/layout/landing/Landing";
 import Alert from "../../components/alert/Alert";
 import Search from "../../components/search/Search";
@@ -15,7 +14,9 @@ const Main = () => {
         <div className="search-container">
           <Alert />
           <Search />
-        <small className="search-example">e.g. chicken, mushroom, onions</small>
+          <small className="search-example">
+            e.g. chicken, mushroom, onions
+          </small>
         </div>
         <span className="tag">
           Powered by{" "}

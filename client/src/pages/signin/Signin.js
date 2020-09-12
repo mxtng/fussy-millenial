@@ -2,10 +2,9 @@ import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Landing from "../../components/layout/landing/Landing";
-import { loginUser } from "../../redux/actions/auth";
 import Alert from "../../components/alert/Alert";
-
 import { showAlert, hideAlert } from "../../redux/actions/alert";
+import { loginUser } from "../../redux/actions/auth";
 
 import "./Signin.scss";
 
@@ -28,16 +27,17 @@ const Signin = ({ loginUser, authenticated, showAlert, hideAlert }) => {
     e.preventDefault();
 
     if (!email || !password) return showAlert("Invalid credentials");
-
     loginUser(formData);
   };
 
+  // Unsubscribe alert
   useEffect(() => {
     return () => {
       hideAlert();
-    }
-  })
+    };
+  }, [hideAlert]);
 
+  // Authenticated user redirect to main page
   if (authenticated) return <Redirect to="/" />;
 
   return (
@@ -88,4 +88,6 @@ const mapStateToProps = ({ auth: { authenticated } }) => ({
   authenticated,
 });
 
-export default connect(mapStateToProps, { loginUser, showAlert, hideAlert })(Signin);
+export default connect(mapStateToProps, { loginUser, showAlert, hideAlert })(
+  Signin
+);

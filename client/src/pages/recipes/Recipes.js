@@ -18,12 +18,12 @@ const Recipes = ({
   updateFavourite,
   updateUserFavourite,
 }) => {
-  const favClick = (recipe) => {
+  const clickFavourite = (recipe) => {
     // Rename id to recipeId
     recipe.recipeId = recipe.id;
     delete recipe.id;
 
-    // Update guest favourite recipes
+    // Update guest favourite recipe
     if (!authenticated) {
       return updateFavourite(recipe);
     }
@@ -52,7 +52,7 @@ const Recipes = ({
                   type="button"
                   name="favourite"
                   className="btn btn-secondary"
-                  onClick={() => favClick(props)}
+                  onClick={() => clickFavourite(props)}
                 >
                   Favourite
                 </button>
