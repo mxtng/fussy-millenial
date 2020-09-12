@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
-import { fetchRecipes } from "../../redux/actions/recipe";
-import { showAlert, hideAlert } from "../../redux/actions/alert";
-
 import { withRouter } from "react-router-dom";
+import { showAlert, hideAlert } from "../../redux/actions/alert";
+import { fetchRecipes } from "../../redux/actions/recipe";
 
 import "./Search.scss";
 
 const Search = ({
-  loading,
-  ingredients,
-  fetchRecipes,
-  showAlert,
-  hideAlert,
   history,
   location,
+  loading,
+  showAlert,
+  hideAlert,
+  fetchRecipes,
+  ingredients,
 }) => {
+  // Initialize user ingredient search state
   const [ingredientList, setIngredientList] = useState("");
 
+  // Subscribe user ingredient search
   useEffect(() => {
     if (ingredients) return setIngredientList(ingredients);
 
     !loading && setIngredientList("");
   }, [loading, ingredients]);
 
+  // Unsubscribe alert
   useEffect(() => {
     return () => {
       hideAlert();
@@ -35,9 +36,8 @@ const Search = ({
     setIngredientList(e.target.value);
   };
 
-  const findRecipes = () => {
+  const clickSearch = () => {
     if (!ingredientList) return showAlert("Please enter ingredients");
-
     fetchRecipes(ingredientList);
 
     if (location.pathname === "/") {
@@ -55,7 +55,7 @@ const Search = ({
         onChange={onChange}
         value={ingredientList}
       />
-      <button type="button" className="btn btn-secondary" onClick={findRecipes}>
+      <button type="button" className="btn btn-secondary" onClick={clickSearch}>
         Search
       </button>
     </div>
