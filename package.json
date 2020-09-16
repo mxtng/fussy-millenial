@@ -3,13 +3,13 @@
   "version": "2.0.0",
   "description": "A recipe search by ingredient app built on MERN stack",
   "repository": {
-    "type": "svn",
-    "url": "https://github.com/mxtng/fussy-millennial"
+    "type": "git",
+    "url": "https://github.com/mxtng/fussy-millennial.git"
   },
   "author": "M. Tang",
   "license": "ISC",
   "private": "true",
-  "main": "server/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "npm start --prefix server",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
